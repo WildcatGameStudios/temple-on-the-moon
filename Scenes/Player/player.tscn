@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch0ngvub8x32f"]
+
+[ext_resource type="SpriteFrames" uid="uid://dtqm2ruysk0tk" path="res://Resources/Spriteframes/player.tres" id="1_eks58"]
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_ymc8e"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine.gd" id="3_ao45h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvcag"]
+radius = 29.0
+height = 188.0
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(2, 2)
+script = ExtResource("1_ymc8e")
+max_jump_height = 5.0
+time_to_peak = 0.75
+fall_speed_boost = 0.75
+fast_fall_speed_boost = 20.0
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_eks58")
+animation = &"idle"
+
+[node name="collision_capsule" type="CollisionShape2D" parent="."]
+position = Vector2(0, 22)
+shape = SubResource("CapsuleShape2D_vvcag")
+
+[node name="State_Machine" type="Node" parent="."]
+script = ExtResource("3_ao45h")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -228.0
+offset_top = 3.0
+offset_right = 21.0
+offset_bottom = 58.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="dash_reset_timer" type="Timer" parent="Timers"]
+
+[node name="dash_timer" type="Timer" parent="Timers"]
+
+[connection signal="timeout" from="Timers/dash_reset_timer" to="." method="_on_dash_reset_timer_timeout"]
+[connection signal="timeout" from="Timers/dash_timer" to="." method="_on_dash_timer_timeout"]
