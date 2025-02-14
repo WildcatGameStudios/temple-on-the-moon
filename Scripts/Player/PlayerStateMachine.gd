@@ -125,7 +125,7 @@ func get_transition(delta) :
 				return states.Hit
 			if Input.is_action_just_pressed("Dash") and parent.can_dash : 
 				return states.Dash
-			if Input.is_action_just_pressed("Fast Fall") :
+			if Input.is_action_just_pressed("Fast_Fall") :
 				return states.FastFall
 			if parent.velocity.y > 0 : 
 				return states.Fall
