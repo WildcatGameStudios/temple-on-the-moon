@@ -29,33 +29,33 @@ animation = &"idle"
 position = Vector2(0, 22)
 shape = SubResource("CapsuleShape2D_vvcag")
 
-[node name="State_Machine" type="Node" parent="."]
+[node name="state_machine" type="Node" parent="."]
 script = ExtResource("3_ao45h")
 
-[node name="Label" type="Label" parent="."]
+[node name="label" type="Label" parent="."]
 offset_left = -228.0
 offset_top = 3.0
 offset_right = 21.0
 offset_bottom = 58.0
 
-[node name="Timers" type="Node" parent="."]
+[node name="timers" type="Node" parent="."]
 
-[node name="dash_reset_timer" type="Timer" parent="Timers"]
+[node name="dash_reset_timer" type="Timer" parent="timers"]
 
-[node name="dash_timer" type="Timer" parent="Timers"]
+[node name="dash_timer" type="Timer" parent="timers"]
 
-[node name="HitStunTimer" type="Timer" parent="Timers"]
+[node name="hit_stun_timer" type="Timer" parent="timers"]
 wait_time = 0.3
 
-[node name="Hitbox" parent="." instance=ExtResource("4_u6vjy")]
+[node name="hitbox" parent="." instance=ExtResource("4_u6vjy")]
 collision_layer = 1
 collision_mask = 1
 
-[node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]
+[node name="hitbox_collider" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(0, 22)
 shape = SubResource("CapsuleShape2D_ypdb4")
 
-[connection signal="timeout" from="Timers/dash_reset_timer" to="." method="_on_dash_reset_timer_timeout"]
-[connection signal="timeout" from="Timers/dash_timer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="Timers/HitStunTimer" to="." method="_on_hit_stun_timer_timeout"]
-[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
+[connection signal="timeout" from="timers/dash_reset_timer" to="." method="_on_dash_reset_timer_timeout"]
+[connection signal="timeout" from="timers/dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="timers/hit_stun_timer" to="." method="_on_hit_stun_timer_timeout"]
+[connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]

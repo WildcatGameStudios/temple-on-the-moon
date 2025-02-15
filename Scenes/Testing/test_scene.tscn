@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://ce40yi1g64q4h"]
+[gd_scene load_steps=5 format=4 uid="uid://ce40yi1g64q4h"]
 
 [ext_resource type="PackedScene" uid="uid://ch0ngvub8x32f" path="res://Scenes/Player/player.tscn" id="1_i82st"]
-[ext_resource type="Script" path="res://Scenes/Testing/test_scene.gd" id="1_kca3k"]
 [ext_resource type="TileSet" uid="uid://bgs6qd1bp27v5" path="res://Resources/Tilesets/test_set.tres" id="2_njfcn"]
 [ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="3_ijmac"]
 
@@ -10,7 +9,6 @@ radius = 129.0
 height = 304.0
 
 [node name="test_scene" type="Node2D"]
-script = ExtResource("1_kca3k")
 
 [node name="player" parent="." instance=ExtResource("1_i82st")]
 position = Vector2(213, 22)
