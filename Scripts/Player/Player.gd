@@ -36,9 +36,9 @@ extends CharacterBody2D
 @export var dash_distance : float = 100
 
 # Scene Refrences
-@onready var dash_timer: Timer = $Timers/dash_timer
-@onready var dash_reset_timer: Timer = $Timers/dash_reset_timer
-@onready var label: Label = $Label
+@onready var dash_timer: Timer = $timers/dash_timer
+@onready var dash_reset_timer: Timer = $timers/dash_reset_timer
+@onready var label: Label = $label
 @onready var sprite: AnimatedSprite2D = $sprite
 
 
@@ -102,7 +102,7 @@ func _ready() -> void:
 	dash_per_second = (dash_distance * tile_scale) / dash_duration
 	
 	# enable player to take damage
-	$Hitbox.monitoring = true
+	$hitbox.monitoring = true
 
 
 func play_anim (animation : String) -> void :
@@ -226,7 +226,7 @@ func knockback (origin: Vector2) :
 func die () : 
 	print("player died")
 	# prevent player from continuing to take damage after death
-	$Hitbox.monitoring = false
+	$hitbox.monitoring = false
 	
 
 func return_health() -> int : 
@@ -252,7 +252,7 @@ func _on_hitbox_hit(origin: Vector2) -> void:
 	hit()
 	knockback(origin)
 	can_walk = false
-	$Timers/HitStunTimer.start()
+	$timers/hit_stun_timer.start()
 
 
 func _on_hit_stun_timer_timeout() -> void:

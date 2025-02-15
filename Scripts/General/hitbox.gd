@@ -22,7 +22,7 @@ signal cooldown_timeout
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Cooldown.wait_time = cooldown
+	$cooldown.wait_time = cooldown
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		origin /= collisions.size()
 		emit_signal("hit", origin)
 		cooling_down = true
-		$Cooldown.start()
+		$cooldown.start()
 
 ## add_blacklist
 ## This function adds a Hurtbox to the current blacklisted hurtboxes. A
