@@ -115,5 +115,5 @@ sprite_frames = SubResource("SpriteFrames_hu35i")
 
 [node name="body_hurtbox" parent="." index="2" instance=ExtResource("4_lqtmo")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="body_hurtbox" index="0"]
+[node name="hurtbox_collider" type="CollisionShape2D" parent="body_hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_2xkc4")
