@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	if not self.collisions.is_empty() and not cooling_down:
 		var origin: Vector2 = Vector2.ZERO
 		for c in collisions:
-			origin += c.position
+			origin += c.global_position
 		origin /= collisions.size()
 		emit_signal("hit", origin)
 		cooling_down = true

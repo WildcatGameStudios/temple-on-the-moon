@@ -52,7 +52,6 @@ var gravity : float  :
 # Walk variables
 var walk_speed : float 
 var jump_walk_speed : float 
-var can_walk : bool = true
 
 # Jump variables 
 var jump_charge_per_second : float
@@ -75,6 +74,10 @@ var temp_dash : float
 var dash_per_second : float 
 var can_dash : bool = true
 var in_dash : bool = true
+
+# Hit variables
+var hit_stun: bool = false
+var hit_origin: Vector2 = Vector2.ZERO
 
 var health : int = 4
   
@@ -135,20 +138,18 @@ func move (delta) :
 	if !is_on_floor() : 
 		apply_gravity(delta)
 	
-	if velocity.x < 0 : 
-		sprite.flip_h = true
-	elif velocity.x > 0 : 
-		sprite.flip_h = false
-	
-	
 	move_and_slide()
 
 
 # Function to move the player if they're walking horizontaly
 func walk (delta) :
-	if can_walk:
-		var x_direction = Input.get_action_strength("Walk_Right") - Input.get_action_strength("Walk_Left")
-		velocity.x = x_direction * walk_speed 
+	var x_direction = Input.get_action_strength("Walk_Right") - Input.get_action_strength("Walk_Left")
+	velocity.x = x_direction * walk_speed 
+
+	if velocity.x < 0 : 
+		sprite.flip_h = true
+	elif velocity.x > 0 : 
+		sprite.flip_h = false
 	
 
 func jump_walk (delta) : 
@@ -215,10 +216,13 @@ func hit () :
 		die()
 	pass
 
-func knockback (origin: Vector2) : 
-	prints("player knock backed from", origin)
+## Knockback
+## Sets the player's velocity to be pointing away from the "hit_origin" vector
+## set when the player enters a hit state.
+func knockback () : 
+	prints("player knock backed from", hit_origin)
 	var new_velocity: Vector2 = Vector2(1000, -1000)
-	if position.x < origin.x:
+	if position.x < hit_origin.x:
 		new_velocity.x *= -1
 	self.velocity = new_velocity
 
@@ -233,7 +237,7 @@ func return_health() -> int :
 	return health
 
 func was_hit () -> bool : 
-	return false
+	return hit_stun
 
 
 func _on_dash_timer_timeout() -> void:
@@ -249,11 +253,9 @@ func player () :
 
 
 func _on_hitbox_hit(origin: Vector2) -> void:
-	hit()
-	knockback(origin)
-	can_walk = false
+	hit_stun = true
+	hit_origin = origin
 	$timers/hit_stun_timer.start()
 
-
 func _on_hit_stun_timer_timeout() -> void:
-	can_walk = true
+	hit_stun = false
