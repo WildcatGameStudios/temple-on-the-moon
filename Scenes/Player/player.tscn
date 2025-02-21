@@ -23,7 +23,7 @@ fast_fall_speed_boost = 20.0
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_eks58")
-animation = &"idle"
+animation = &"hit"
 
 [node name="collision_capsule" type="CollisionShape2D" parent="."]
 position = Vector2(0, 22)

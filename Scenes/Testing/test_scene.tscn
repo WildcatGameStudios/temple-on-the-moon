@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://ce40yi1g64q4h"]
+[gd_scene load_steps=6 format=4 uid="uid://ce40yi1g64q4h"]
 
 [ext_resource type="PackedScene" uid="uid://ch0ngvub8x32f" path="res://Scenes/Player/player.tscn" id="1_i82st"]
 [ext_resource type="TileSet" uid="uid://bgs6qd1bp27v5" path="res://Resources/Tilesets/test_set.tres" id="2_njfcn"]
 [ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="3_ijmac"]
+[ext_resource type="PackedScene" uid="uid://dtdlc5urgrh4v" path="res://Scenes/Enemies/debug_alien.tscn" id="4_ccjvr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o1vjh"]
 radius = 129.0
@@ -33,3 +34,6 @@ position = Vector2(1072, -62)
 
 [node name="HurtboxCollider" type="CollisionShape2D" parent="Hurtbox2"]
 shape = SubResource("CapsuleShape2D_o1vjh")
+
+[node name="debug_alien" parent="." instance=ExtResource("4_ccjvr")]
+position = Vector2(480, -74)
