@@ -8,6 +8,7 @@ var collisions: Array[Hurtbox]
 var cooling_down: bool = false
 
 @export var cooldown: float = 1.0
+@export var blacklist_type: Array[Hurtbox.HurtboxType]
 
 ## hit signal
 ## This signal is emitted when the hitbox detects hurtboxes within itself while
@@ -22,6 +23,7 @@ signal cooldown_timeout
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	$cooldown.wait_time = cooldown
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,7 +57,9 @@ func remove_blacklist(target: Hurtbox):
 
 func _on_area_entered(area: Area2D) -> void:
 	if is_instance_of(area, Hurtbox):
-		if not self.collisions.has(area) and not self.blacklist.has(area):
+		if not self.collisions.has(area) and \
+			not self.blacklist.has(area) and \
+			not self.blacklist_type.has(area.type):
 			self.collisions.append(area)
 
 ## TODO: what happens if a hurtbox despawns while inside a hitbox??
