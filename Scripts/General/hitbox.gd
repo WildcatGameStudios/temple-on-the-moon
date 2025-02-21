@@ -14,7 +14,7 @@ var cooling_down: bool = false
 ## not cooling down from a previous hit. See Hitbox._process for its usage.
 ## The origin of the collision is the vector mean of the positions of each
 ## colliding hurtbox.
-signal hit(origin: Vector2)
+signal hit(origin: Vector2, damage: int, knockback: float)
 
 ## cooldown_timeout
 ## This signal is emitted when the hitbox can be triggered again.
@@ -28,10 +28,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not self.collisions.is_empty() and not cooling_down:
 		var origin: Vector2 = Vector2.ZERO
+		var damage: int = -1 # negative damage is invalid
+		var knockback: float = -1.0 # negative knockback is invalid
 		for c in collisions:
-			origin += c.global_position
+			damage = max(damage, c.hurt_damage)
+			knockback = max(knockback, c.knockback)
+			origin += c.position
 		origin /= collisions.size()
-		emit_signal("hit", origin)
+		hit.emit(origin, damage, knockback)
 		cooling_down = true
 		$cooldown.start()
 

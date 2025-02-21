@@ -43,8 +43,8 @@ func _physics_process(delta):
 func state_logic(delta) : 
 	match state :
 		states.Idle : 
-			# do nothing 
-			pass
+			parent.walk(delta)
+			parent.move(delta)
 		states.Walk : 
 			# Walk handles the horizontal input, then move handles animation and move and slide 
 			parent.walk(delta)
