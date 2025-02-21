@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 		for c in collisions:
 			damage = max(damage, c.hurt_damage)
 			knockback = max(knockback, c.knockback)
-			origin += c.position
+			origin += c.global_position
 		origin /= collisions.size()
 		hit.emit(origin, damage, knockback)
 		cooling_down = true
