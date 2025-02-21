@@ -104,7 +104,6 @@ func _ready() -> void:
 	# enable player to take damage
 	$hitbox.monitoring = true
 
-
 func play_anim (animation : String) -> void :
 	sprite.play(animation)
 	
@@ -148,7 +147,7 @@ func move (delta) :
 func walk (delta) :
 	if can_walk:
 		var x_direction = Input.get_action_strength("Walk_Right") - Input.get_action_strength("Walk_Left")
-		velocity.x = x_direction * walk_speed 
+		velocity.x = x_direction * walk_speed
 	
 
 func jump_walk (delta) : 
@@ -209,8 +208,8 @@ func dash () :
 
 
 
-func hit () : 
-	self.health -= 1
+func hit (damage: int) : 
+	self.health -= damage
 	if self.health <= 0:
 		die()
 	pass
@@ -248,8 +247,9 @@ func player () :
 	pass
 
 
-func _on_hitbox_hit(origin: Vector2) -> void:
-	hit()
+func _on_hitbox_hit(origin: Vector2, damage: int, knockback: float) -> void:
+	print("player hit with: origin: ", origin, " damage: ", damage, " knockback: ", knockback)
+	hit(damage)
 	knockback(origin)
 	can_walk = false
 	$timers/hit_stun_timer.start()
