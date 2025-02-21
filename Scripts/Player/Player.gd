@@ -142,7 +142,7 @@ func move (delta) :
 
 # Function to move the player if they're walking horizontaly
 func walk (delta) :
-	if can_walk:
+	if not hit_stun:
 		var x_direction = Input.get_action_strength("Walk_Right") - Input.get_action_strength("Walk_Left")
 		velocity.x = x_direction * walk_speed
 	
@@ -249,8 +249,8 @@ func player () :
 func _on_hitbox_hit(origin: Vector2, damage: int, knockback: float) -> void:
 	print("player hit with: origin: ", origin, " damage: ", damage, " knockback: ", knockback)
 	hit(damage)
-	knockback(origin)
-	can_walk = false
+	knockback()
+	hit_stun = true
 	$timers/hit_stun_timer.start()
 
 func _on_hit_stun_timer_timeout() -> void:

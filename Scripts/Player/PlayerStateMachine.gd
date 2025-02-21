@@ -245,7 +245,6 @@ func enter_state(new_state, old_state) :
 		states.Hit :
 			parent.play_anim("hit")
 			print("Entering hit")
-			parent.hit()
 			parent.knockback()
 		states.Die : 
 			parent.play_anim("die")
