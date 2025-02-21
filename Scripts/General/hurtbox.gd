@@ -2,8 +2,15 @@ extends Area2D
 
 class_name Hurtbox
 
+enum HurtboxType {
+	Player,
+	Enemy,
+	Environment
+}
+
 @export var hurt_damage: int = 1
 @export var knockback: float = 100.0
+@export var type: HurtboxType = HurtboxType.Environment
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

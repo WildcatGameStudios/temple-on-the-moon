@@ -137,6 +137,7 @@ func move (delta) :
 	if !is_on_floor() : 
 		apply_gravity(delta)
 	
+	
 	move_and_slide()
 
 
@@ -145,6 +146,10 @@ func walk (delta) :
 	if not hit_stun:
 		var x_direction = Input.get_action_strength("Walk_Right") - Input.get_action_strength("Walk_Left")
 		velocity.x = x_direction * walk_speed
+		if velocity.x < 0:
+			sprite.flip_h = true
+		elif velocity.x > 0:
+			sprite.flip_h = false
 	
 
 func jump_walk (delta) : 
@@ -214,9 +219,9 @@ func hit (damage: int) :
 ## Knockback
 ## Sets the player's velocity to be pointing away from the "hit_origin" vector
 ## set when the player enters a hit state.
-func knockback () : 
+func knockback (knockback) : 
 	prints("player knock backed from", hit_origin)
-	var new_velocity: Vector2 = Vector2(1000, -1000)
+	var new_velocity: Vector2 = Vector2(10, -10) * knockback
 	if position.x < hit_origin.x:
 		new_velocity.x *= -1
 	self.velocity = new_velocity
@@ -248,8 +253,9 @@ func player () :
 
 func _on_hitbox_hit(origin: Vector2, damage: int, knockback: float) -> void:
 	print("player hit with: origin: ", origin, " damage: ", damage, " knockback: ", knockback)
+	hit_origin = origin
 	hit(damage)
-	knockback()
+	knockback(knockback)
 	hit_stun = true
 	$timers/hit_stun_timer.start()
 
