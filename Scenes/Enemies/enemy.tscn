@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvm1ewio2b6uf"]
+
+[ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="1_1pc0l"]
+[ext_resource type="Script" path="res://Scenes/Enemies/enemy.gd" id="1_6q00v"]
+[ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="2_0cdpa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r23k0"]
+size = Vector2(120, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ip648"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5iyj8"]
+size = Vector2(128, 128)
+
+[node name="enemy" type="RigidBody2D"]
+sleeping = true
+lock_rotation = true
+freeze = true
+script = ExtResource("1_6q00v")
+
+[node name="enemy_collider" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_r23k0")
+
+[node name="hitbox" parent="." instance=ExtResource("1_1pc0l")]
+
+[node name="hitbox_collider" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("RectangleShape2D_ip648")
+
+[node name="hurtbox" parent="." instance=ExtResource("2_0cdpa")]
+
+[node name="hurtbox_collider" type="CollisionShape2D" parent="hurtbox"]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_5iyj8")
+debug_color = Color(1, 0.00239956, 0.0749063, 0.42)
+
+[node name="raycast" type="RayCast2D" parent="."]
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+
+[node name="noisemaker" type="Node" parent="."]

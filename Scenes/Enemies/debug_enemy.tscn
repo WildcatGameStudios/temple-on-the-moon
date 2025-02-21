@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://elkueol6hpev"]
+
+[ext_resource type="PackedScene" uid="uid://cvm1ewio2b6uf" path="res://Scenes/Enemies/enemy.tscn" id="1_vskbr"]
+[ext_resource type="Script" path="res://Scenes/Enemies/debug_enemy.gd" id="2_4qdjh"]
+[ext_resource type="Texture2D" uid="uid://be42mbm5c2ro6" path="res://icon.svg" id="2_lq0ep"]
+[ext_resource type="AudioStream" uid="uid://dbxjme6dxcagr" path="res://Art/Audio/hit.wav" id="4_vrbyg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iei01"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lq0ep")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="debug_enemy" instance=ExtResource("1_vskbr")]
+script = ExtResource("2_4qdjh")
+
+[node name="animation" parent="." index="4"]
+sprite_frames = SubResource("SpriteFrames_iei01")
+
+[node name="hit" type="AudioStreamPlayer2D" parent="noisemaker" index="0"]
+stream = ExtResource("4_vrbyg")
