@@ -43,8 +43,8 @@ func _physics_process(delta):
 func state_logic(delta) : 
 	match state :
 		states.Idle : 
-			# do nothing 
-			pass
+			parent.walk(delta)
+			parent.move(delta)
 		states.Walk : 
 			# Walk handles the horizontal input, then move handles animation and move and slide 
 			parent.walk(delta)
@@ -70,7 +70,8 @@ func state_logic(delta) :
 		states.Dash : 
 			parent.move(delta)
 		states.Hit :
-			pass
+			parent.fall()
+			parent.move(delta)
 		states.Die : 
 			pass
 			
@@ -194,6 +195,8 @@ func get_transition(delta) :
 		states.Hit :
 			if parent.health <= 0 : 
 				return states.Die
+			if not parent.was_hit():
+				return states.Fall
 	
 		states.Die : 
 			pass
@@ -242,6 +245,8 @@ func enter_state(new_state, old_state) :
 		states.Hit :
 			parent.play_anim("hit")
 			print("Entering hit")
+			parent.hit()
+			parent.knockback()
 		states.Die : 
 			parent.play_anim("die")
 			print("Entering die")

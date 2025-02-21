@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ch0ngvub8x32f"]
+[gd_scene load_steps=7 format=3 uid="uid://ch0ngvub8x32f"]
 
 [ext_resource type="SpriteFrames" uid="uid://dtqm2ruysk0tk" path="res://Resources/Spriteframes/player.tres" id="1_eks58"]
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_ymc8e"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine.gd" id="3_ao45h"]
+[ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="4_u6vjy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvcag"]
+radius = 29.0
+height = 188.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ypdb4"]
 radius = 29.0
 height = 188.0
 
@@ -18,26 +23,39 @@ fast_fall_speed_boost = 20.0
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_eks58")
-animation = &"idle"
+animation = &"hit"
 
 [node name="collision_capsule" type="CollisionShape2D" parent="."]
 position = Vector2(0, 22)
 shape = SubResource("CapsuleShape2D_vvcag")
 
-[node name="State_Machine" type="Node" parent="."]
+[node name="state_machine" type="Node" parent="."]
 script = ExtResource("3_ao45h")
 
-[node name="Label" type="Label" parent="."]
+[node name="label" type="Label" parent="."]
 offset_left = -228.0
 offset_top = 3.0
 offset_right = 21.0
 offset_bottom = 58.0
 
-[node name="Timers" type="Node" parent="."]
+[node name="timers" type="Node" parent="."]
 
-[node name="dash_reset_timer" type="Timer" parent="Timers"]
+[node name="dash_reset_timer" type="Timer" parent="timers"]
 
-[node name="dash_timer" type="Timer" parent="Timers"]
+[node name="dash_timer" type="Timer" parent="timers"]
 
-[connection signal="timeout" from="Timers/dash_reset_timer" to="." method="_on_dash_reset_timer_timeout"]
-[connection signal="timeout" from="Timers/dash_timer" to="." method="_on_dash_timer_timeout"]
+[node name="hit_stun_timer" type="Timer" parent="timers"]
+wait_time = 0.3
+
+[node name="hitbox" parent="." instance=ExtResource("4_u6vjy")]
+collision_layer = 1
+collision_mask = 1
+
+[node name="hitbox_collider" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 22)
+shape = SubResource("CapsuleShape2D_ypdb4")
+
+[connection signal="timeout" from="timers/dash_reset_timer" to="." method="_on_dash_reset_timer_timeout"]
+[connection signal="timeout" from="timers/dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="timers/hit_stun_timer" to="." method="_on_hit_stun_timer_timeout"]
+[connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]

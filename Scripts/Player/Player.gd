@@ -36,9 +36,9 @@ extends CharacterBody2D
 @export var dash_distance : float = 100
 
 # Scene Refrences
-@onready var dash_timer: Timer = $Timers/dash_timer
-@onready var dash_reset_timer: Timer = $Timers/dash_reset_timer
-@onready var label: Label = $Label
+@onready var dash_timer: Timer = $timers/dash_timer
+@onready var dash_reset_timer: Timer = $timers/dash_reset_timer
+@onready var label: Label = $label
 @onready var sprite: AnimatedSprite2D = $sprite
 
 
@@ -75,7 +75,11 @@ var dash_per_second : float
 var can_dash : bool = true
 var in_dash : bool = true
 
-var health : int = 10
+# Hit variables
+var hit_stun: bool = false
+var hit_origin: Vector2 = Vector2.ZERO
+
+var health : int = 4
   
 # ready function to be called on instance 
 func _ready() -> void:
@@ -100,8 +104,8 @@ func _ready() -> void:
 	# calculate dash variables
 	dash_per_second = (dash_distance * tile_scale) / dash_duration
 	
-	
-
+	# enable player to take damage
+	$hitbox.monitoring = true
 
 func play_anim (animation : String) -> void :
 	sprite.play(animation)
@@ -133,20 +137,14 @@ func move (delta) :
 	if !is_on_floor() : 
 		apply_gravity(delta)
 	
-	if velocity.x < 0 : 
-		sprite.flip_h = true
-	elif velocity.x > 0 : 
-		sprite.flip_h = false
-	
-	
 	move_and_slide()
 
 
 # Function to move the player if they're walking horizontaly
 func walk (delta) :
-	
-	var x_direction = Input.get_action_strength("Walk_Right") - Input.get_action_strength("Walk_Left")
-	velocity.x = x_direction * walk_speed 
+	if can_walk:
+		var x_direction = Input.get_action_strength("Walk_Right") - Input.get_action_strength("Walk_Left")
+		velocity.x = x_direction * walk_speed
 	
 
 func jump_walk (delta) : 
@@ -207,23 +205,34 @@ func dash () :
 
 
 
-func hit () : 
+func hit (damage: int) : 
+	self.health -= damage
+	if self.health <= 0:
+		die()
 	pass
 
+## Knockback
+## Sets the player's velocity to be pointing away from the "hit_origin" vector
+## set when the player enters a hit state.
 func knockback () : 
-	print("player knock backed")
-	
+	prints("player knock backed from", hit_origin)
+	var new_velocity: Vector2 = Vector2(1000, -1000)
+	if position.x < hit_origin.x:
+		new_velocity.x *= -1
+	self.velocity = new_velocity
 
 
 func die () : 
 	print("player died")
+	# prevent player from continuing to take damage after death
+	$hitbox.monitoring = false
 	
 
 func return_health() -> int : 
 	return health
 
 func was_hit () -> bool : 
-	return false
+	return hit_stun
 
 
 func _on_dash_timer_timeout() -> void:
@@ -236,3 +245,13 @@ func _on_dash_reset_timer_timeout() -> void:
 
 func player () :
 	pass
+
+func _on_hitbox_hit(origin: Vector2, damage: int, knockback: float) -> void:
+	print("player hit with: origin: ", origin, " damage: ", damage, " knockback: ", knockback)
+	hit(damage)
+	knockback(origin)
+	can_walk = false
+	$timers/hit_stun_timer.start()
+
+func _on_hit_stun_timer_timeout() -> void:
+	hit_stun = false

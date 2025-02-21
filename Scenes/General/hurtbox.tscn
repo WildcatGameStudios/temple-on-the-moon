@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxw3oselkunhj"]
+
+[ext_resource type="Script" path="res://Scripts/General/hurtbox.gd" id="1_cvmod"]
+
+[node name="hurtbox" type="Area2D"]
+script = ExtResource("1_cvmod")
