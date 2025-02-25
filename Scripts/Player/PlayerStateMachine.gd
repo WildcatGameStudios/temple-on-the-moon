@@ -213,41 +213,32 @@ func enter_state(new_state, old_state) :
 			if old_state == states.Dash : 
 				parent.reset_dash()
 			parent.play_anim("idle")
-			print("Entering Idle")
 		states.Walk : 
 			if old_state == states.Dash : 
 				parent.reset_dash()
 			if old_state == states.Fall or old_state == states.FastFall : 
 				parent.reset_jump()
 			parent.play_anim("walk")
-			print("Entering Walk")
 		states.Jump : 
 			parent.play_anim("jump")
-			print("Entering Jump")
 			parent.jump()
 		states.Fall : 
 			if old_state == states.Dash : 
 				parent.reset_dash()
 			parent.play_anim("fall")
-			print("Entering Fall")
 		states.ChargeJump : 
 			parent.play_anim("charge_jump")
-			print("Entering Charge Jump")
 		states.FastFall : 
 			parent.play_anim("fast_fall")
-			print("Entering Fast fall")
 		states.Dash : 
 			parent.dash()
 			if old_state == states.Fall or old_state == states.FastFall : 
 				parent.reset_jump()
 			parent.play_anim("dash")
-			print("Entering dash")
 		states.Hit :
 			parent.play_anim("hit")
-			print("Entering hit")
 		states.Die : 
 			parent.play_anim("die")
-			print("Entering die")
 
 
 func exit_state(old_state, new_state) : 
