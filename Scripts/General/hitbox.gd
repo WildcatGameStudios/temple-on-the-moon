@@ -23,7 +23,6 @@ signal cooldown_timeout
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	$cooldown.wait_time = cooldown
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,6 +58,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if is_instance_of(area, Hurtbox):
 		if not self.collisions.has(area) and \
 			not self.blacklist.has(area) and \
+			area.enabled and \
 			not self.blacklist_type.has(area.type):
 			self.collisions.append(area)
 

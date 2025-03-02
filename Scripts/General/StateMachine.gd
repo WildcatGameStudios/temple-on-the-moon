@@ -18,7 +18,7 @@ func _physics_process(delta):
 func state_logic(delta) : 
 	pass
 	
-func get_transition(delta) : 
+func get_transition(delta):
 	return null
 	
 func enter_state(new_state, old_state) : 

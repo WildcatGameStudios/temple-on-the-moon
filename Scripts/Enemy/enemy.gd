@@ -8,11 +8,13 @@ extends CharacterBody2D
 ## enemy_collider: the collider that interracts with the physics engine
 ## hitbox: the hitbox for this enemy (for when the player/environment hits it)
 ## hurtbox: the hurtbox that damages the player
-## raycast: a general-purpose raycast to use for pathfinding, AI, etc
+## raycast: a general-purpose node for grouping your Raycast2D's
 ## animation: an abstract element that must be implemented by child classes
 ## noisemaker: a node to use for grouping your AudioStreamPlayers together
 
 class_name Enemy
+
+const ENEMY_GRAVITY: float = 8.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

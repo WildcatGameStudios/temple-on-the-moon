@@ -11,6 +11,7 @@ enum HurtboxType {
 @export var hurt_damage: int = 1
 @export var knockback: float = 100.0
 @export var type: HurtboxType = HurtboxType.Environment
+@export var enabled: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
