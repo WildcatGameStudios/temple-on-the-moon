@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://cvm1ewio2b6uf" path="res://Scenes/Enemy/enemy.tscn" id="1_cfmwh"]
 [ext_resource type="SpriteFrames" uid="uid://bvfgvywg0s7ve" path="res://Resources/Spriteframes/rover_base.tres" id="2_g2fjl"]
-[ext_resource type="Script" path="res://Scripts/Enemy/rover.gd" id="2_ijpbi"]
-[ext_resource type="Script" path="res://Scripts/Enemy/rover_state_machine.gd" id="4_iro2x"]
-[ext_resource type="Script" path="res://Scripts/General/hurtbox.gd" id="4_l33ua"]
+[ext_resource type="Script" uid="uid://cvhlw4jsk13lf" path="res://Scripts/Enemy/rover.gd" id="2_ijpbi"]
+[ext_resource type="Script" uid="uid://bh0dmktmxpmoa" path="res://Scripts/Enemy/rover_state_machine.gd" id="4_iro2x"]
+[ext_resource type="Script" uid="uid://cdo2j6y61n02u" path="res://Scripts/General/hurtbox.gd" id="4_l33ua"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qm3ma"]
 
