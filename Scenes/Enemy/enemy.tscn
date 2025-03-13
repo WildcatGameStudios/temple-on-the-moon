@@ -21,6 +21,7 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_r23k0")
 
 [node name="hitbox" parent="." instance=ExtResource("1_1pc0l")]
+blacklist_type = Array[int]([1])
 
 [node name="hitbox_collider" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("RectangleShape2D_ip648")
