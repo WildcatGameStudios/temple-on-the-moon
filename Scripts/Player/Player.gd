@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Variables that can change movement 
 @export_group ("Walk Variables")
-@export var walk_speed_tiles : float = 5
+@export var walk_speed_tiles : float = 5 
 @export var horizontal_jump_dist : int = 10
 
 # Define the jump variables the devs can work with in editor
@@ -34,6 +34,10 @@ extends CharacterBody2D
 @export var dash_cooldown : float = 3.0
 @export var dash_duration : float = 1.0
 @export var dash_distance : float = 100
+
+@export_group("Coyote time")
+@export var jump_catch_frames = 5
+@export var jump_watch_frames = 5
 
 # Scene Refrences
 @onready var dash_timer: Timer = $timers/dash_timer
@@ -78,20 +82,19 @@ var in_dash : bool = true
 # Hit variables
 var hit_stun: bool = false
 var hit_origin: Vector2 = Vector2.ZERO
-
 var health : int = 4
+
+# Coyote time variables 
+var frames_since_jump = 0 
+
+
+
   
 # ready function to be called on instance 
 func _ready() -> void:
 	# set paremeters of child nodes 
 	dash_reset_timer.wait_time = dash_cooldown
 	dash_timer.wait_time = dash_duration
-	
-	#calculate walk variables
-	walk_speed = walk_speed_tiles  * tile_scale
-	var time_down = sqrt( (max_jump_height * tile_scale) / ( (0.5 * gravity) +   fall_speed_boost) )
-	jump_walk_speed = (horizontal_jump_dist * tile_scale) / (time_to_peak + time_down)
-	print(jump_walk_speed)
 	
 	#calculate jump variables 
 	gravity = (2 * (max_jump_height * tile_scale)) / (time_to_peak * time_to_peak) 
@@ -100,6 +103,11 @@ func _ready() -> void:
 	charge_jump_max_strength -= jump_strength
 	jump_charge_per_second = (charge_jump_max_strength )  / charge_jump_max_time
 	
+	#calculate walk variables
+	walk_speed = walk_speed_tiles  * tile_scale
+	var time_down = sqrt( 2 * (max_jump_height * tile_scale) / ( (gravity) +   (gravity * fall_speed_boost)) )
+	jump_walk_speed = (horizontal_jump_dist * tile_scale) / (time_to_peak + time_down)
+	print(jump_walk_speed)
 	
 	# calculate dash variables
 	dash_per_second = (dash_distance * tile_scale) / dash_duration
@@ -151,12 +159,17 @@ func walk (delta) :
 		elif velocity.x > 0:
 			sprite.flip_h = false
 	
+	
 
 func jump_walk (delta) : 
 	var x_direction = Input.get_action_strength("Walk_Right") - Input.get_action_strength("Walk_Left")
 	velocity.x = x_direction * jump_walk_speed 
-	print(x_direction)
-	print(jump_walk_speed)
+	if velocity.x < 0:
+		sprite.flip_h = true
+	elif velocity.x > 0:
+		sprite.flip_h = false
+	
+	
 
 
 # Apply logic for when player jumps 
