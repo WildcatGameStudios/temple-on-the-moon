@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cvm1ewio2b6uf"]
 
 [ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="1_1pc0l"]
-[ext_resource type="Script" uid="uid://lolykfkonvyx" path="res://Scripts/Enemy/enemy.gd" id="1_6q00v"]
+[ext_resource type="Script" uid="uid://dr30u80g0ksfu" path="res://Scripts/Enemy/enemy.gd" id="1_6q00v"]
 [ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="2_0cdpa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r23k0"]
@@ -21,6 +21,7 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_r23k0")
 
 [node name="hitbox" parent="." instance=ExtResource("1_1pc0l")]
+blacklist_type = Array[int]([1])
 
 [node name="hitbox_collider" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("RectangleShape2D_ip648")

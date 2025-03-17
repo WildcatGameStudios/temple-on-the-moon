@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cv6jbsmnim731"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy/basic_rock.gd" id="1_4xsiv"]
+[ext_resource type="Script" uid="uid://cr8u8m4owgq0e" path="res://Scripts/Enemy/basic_rock.gd" id="1_4xsiv"]
 [ext_resource type="SpriteFrames" uid="uid://boejq8jbw8bhl" path="res://Resources/Spriteframes/basic_rock.tres" id="1_mamag"]
 [ext_resource type="SpriteFrames" uid="uid://bykda5u72kys0" path="res://Resources/Spriteframes/smoke.tres" id="2_qv6lg"]
 [ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="3_1ynn5"]

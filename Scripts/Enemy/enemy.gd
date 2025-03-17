@@ -16,6 +16,8 @@ class_name Enemy
 
 const ENEMY_GRAVITY: float = 8.0
 
+@export var health: int = 2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# we can't hurt ourselves!
