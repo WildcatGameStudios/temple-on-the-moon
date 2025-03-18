@@ -36,6 +36,7 @@ func _physics_process(delta: float) -> void:
 
 func walk(delta: float) -> void:
 	position.x += strafeSpeed * direction * delta
+	
 	if direction == -1 and (ray_cast_l.is_colliding() or !ray_cast_dl.is_colliding()):
 		direction = 1
 	elif direction == 1 and (ray_cast_r.is_colliding() or !ray_cast_dr.is_colliding()):

@@ -39,11 +39,17 @@ extends CharacterBody2D
 @export var jump_catch_frames = 5
 @export var jump_watch_frames = 5
 
+@export_group("Attack Variables")
+@export var attack_cooldown : float = 2.0
+
+
 # Scene Refrences
 @onready var dash_timer: Timer = $timers/dash_timer
 @onready var dash_reset_timer: Timer = $timers/dash_reset_timer
 @onready var label: Label = $label
 @onready var sprite: AnimatedSprite2D = $sprite
+@onready var attack_cooldown_timer: Timer = $timers/attack_cooldown_timer
+@onready var staff: CharacterBody2D = $staff
 
 
 #general variables 
@@ -87,6 +93,9 @@ var health : int = 4
 # Coyote time variables 
 var frames_since_jump = 0 
 
+# attack variables
+var attack_ready : bool = true
+
 
 
   
@@ -95,6 +104,7 @@ func _ready() -> void:
 	# set paremeters of child nodes 
 	dash_reset_timer.wait_time = dash_cooldown
 	dash_timer.wait_time = dash_duration
+	attack_cooldown_timer.wait_time = attack_cooldown
 	
 	#calculate jump variables 
 	gravity = (2 * (max_jump_height * tile_scale)) / (time_to_peak * time_to_peak) 
@@ -221,7 +231,14 @@ func dash () :
 	in_dash = true
 	dash_timer.start()
 
-
+func attack () : 
+	if attack_ready : 
+		staff.swing()
+		attack_cooldown_timer.start()
+		attack_ready = false
+	else : 
+		# This means cooldown is still active 
+		pass
 
 func hit (damage: int) : 
 	self.health -= damage
@@ -274,3 +291,7 @@ func _on_hitbox_hit(origin: Vector2, damage: int, knockback: float) -> void:
 
 func _on_hit_stun_timer_timeout() -> void:
 	hit_stun = false
+
+
+func _on_attack_cooldown_timer_timeout() -> void:
+	attack_ready = true

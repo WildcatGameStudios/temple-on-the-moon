@@ -9,7 +9,7 @@ extends CharacterBody2D
 # export variables for rock 
 @export var health : int = 1 : 
 	set (new_val) : 
-		if health - new_val <= 0 : 
+		if new_val <= 0 : 
 			die ()
 		else : 
 			health = new_val
@@ -64,7 +64,6 @@ func move (delta) -> void:
 	
 	#Check if gravity needs to be applied 
 	if !is_on_floor() : 
-		print("falling")
 		apply_gravity()
 	
 	# Move the charectar body 
@@ -100,6 +99,7 @@ func apply_gravity () -> void:
 
 # function to die 
 func die () -> void: 
+	print("Called die")
 	is_dead = true
 	smoke.visible = false
 	body.play("die")
@@ -109,7 +109,10 @@ func die () -> void:
 
 # On hit 
 func _on_hitbox_hit(origin: Vector2, damage: int, knockback: float) -> void:
+	
+	print("Hit taken!")
 	health -= damage
+	print("Health at " + str(health))
 
 
 func _on_body_animation_finished() -> void:

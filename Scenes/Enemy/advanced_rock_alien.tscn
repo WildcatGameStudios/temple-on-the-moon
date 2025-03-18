@@ -6,7 +6,7 @@
 [node name="advanced_rock_alien" instance=ExtResource("1_x4mna")]
 script = ExtResource("2_pf0ph")
 strafeSpeed = 100
-rollSpeed = 500
+rollSpeed = 1500
 minXRollDistance = 750
 minYRollDistance = 100
 pullInTime = 1
@@ -14,10 +14,10 @@ direction = 1
 printStateChange = true
 
 [node name="rayCastL" type="RayCast2D" parent="raycast" index="0"]
-target_position = Vector2(-64.4945, 0.24334)
+target_position = Vector2(-120, 0)
 
 [node name="rayCastR" type="RayCast2D" parent="raycast" index="1"]
-target_position = Vector2(64, 0)
+target_position = Vector2(120, 0)
 
 [node name="rayCastDL" type="RayCast2D" parent="raycast" index="2"]
 target_position = Vector2(-63.7046, 70.7864)
@@ -28,3 +28,10 @@ target_position = Vector2(64.5908, 70.5727)
 [node name="rayCastAtPlayer" type="RayCast2D" parent="raycast" index="4"]
 position = Vector2(0, -0.178833)
 collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="." index="6"]
+offset_left = -63.0
+offset_top = -64.0
+offset_right = -23.0
+offset_bottom = -24.0
+scale = Vector2(3.2, 3.2)

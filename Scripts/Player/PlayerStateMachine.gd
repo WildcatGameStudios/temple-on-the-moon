@@ -45,16 +45,25 @@ func state_logic(delta) :
 		states.Idle : 
 			parent.walk(delta)
 			parent.move(delta)
+			
+			if Input.is_action_pressed("Attack") : 
+				parent.attack()
 		states.Walk : 
 			# Walk handles the horizontal input, then move handles animation and move and slide 
 			parent.walk(delta)
 			parent.move(delta)
+			
+			if Input.is_action_pressed("Attack") : 
+				parent.attack()
 			
 		states.Jump : 
 			# same logic actually as walk state 
 			parent.jump_walk(delta)
 			parent.move(delta)
 			parent.frames_since_jump += 1
+			
+			if Input.is_action_pressed("Attack") : 
+				parent.attack()
 		
 		states.Fall : 
 			parent.jump_walk(delta)
@@ -62,14 +71,19 @@ func state_logic(delta) :
 			parent.move(delta)
 			parent.frames_since_jump += 1
 			
+			if Input.is_action_pressed("Attack") : 
+				parent.attack()
+			
 		states.ChargeJump : 
 			parent.charge_jump(delta)
+			
 		states.FastFall : 
 			parent.jump_walk(delta)
 			parent.fall()
 			parent.fast_fall(delta)
 			parent.move(delta)
 			parent.frames_since_jump += 1
+			
 		states.Dash : 
 			parent.move(delta)
 		states.Hit :

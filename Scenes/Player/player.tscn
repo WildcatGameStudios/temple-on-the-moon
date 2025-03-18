@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch0ngvub8x32f"]
+[gd_scene load_steps=8 format=3 uid="uid://ch0ngvub8x32f"]
 
 [ext_resource type="SpriteFrames" uid="uid://dtqm2ruysk0tk" path="res://Resources/Spriteframes/player.tres" id="1_eks58"]
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_ymc8e"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine.gd" id="3_ao45h"]
 [ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="4_u6vjy"]
+[ext_resource type="PackedScene" uid="uid://ic1cm30n0x0y" path="res://Scenes/Player/staff.tscn" id="5_htcer"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvcag"]
 radius = 29.0
@@ -52,6 +53,8 @@ offset_bottom = -124.0
 [node name="hit_stun_timer" type="Timer" parent="timers"]
 wait_time = 0.3
 
+[node name="attack_cooldown_timer" type="Timer" parent="timers"]
+
 [node name="hitbox" parent="." instance=ExtResource("4_u6vjy")]
 scale = Vector2(1.16, 1)
 collision_layer = 1
@@ -62,7 +65,11 @@ blacklist_type = Array[int]([0])
 position = Vector2(0, 22)
 shape = SubResource("CapsuleShape2D_ypdb4")
 
+[node name="staff" parent="." instance=ExtResource("5_htcer")]
+position = Vector2(58, 101)
+
 [connection signal="timeout" from="timers/dash_reset_timer" to="." method="_on_dash_reset_timer_timeout"]
 [connection signal="timeout" from="timers/dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="timers/hit_stun_timer" to="." method="_on_hit_stun_timer_timeout"]
+[connection signal="timeout" from="timers/attack_cooldown_timer" to="." method="_on_attack_cooldown_timer_timeout"]
 [connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]
