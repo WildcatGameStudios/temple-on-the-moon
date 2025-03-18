@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://ch0ngvub8x32f"]
 
 [ext_resource type="SpriteFrames" uid="uid://dtqm2ruysk0tk" path="res://Resources/Spriteframes/player.tres" id="1_eks58"]
-[ext_resource type="Script" uid="uid://bteiuqsno1kej" path="res://Scripts/Player/Player.gd" id="1_ymc8e"]
-[ext_resource type="Script" uid="uid://dd1376gp8m3bc" path="res://Scripts/Player/PlayerStateMachine.gd" id="3_ao45h"]
+[ext_resource type="Script" uid="uid://pc0ur7ut3b2y" path="res://Scripts/Player/Player.gd" id="1_ymc8e"]
+[ext_resource type="Script" uid="uid://cq1x7e5s6p2r6" path="res://Scripts/Player/PlayerStateMachine.gd" id="3_ao45h"]
 [ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="4_u6vjy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvcag"]
@@ -13,7 +13,7 @@ height = 228.0
 radius = 29.0
 height = 188.0
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(2, 2)
 collision_layer = 2
 script = ExtResource("1_ymc8e")
@@ -48,7 +48,7 @@ offset_bottom = -124.0
 [node name="hit_stun_timer" type="Timer" parent="timers"]
 wait_time = 0.3
 
-[node name="hitbox" parent="." instance=ExtResource("4_u6vjy")]
+[node name="hitbox" parent="." groups=["player"] instance=ExtResource("4_u6vjy")]
 scale = Vector2(1.16, 1)
 collision_layer = 1
 collision_mask = 1
