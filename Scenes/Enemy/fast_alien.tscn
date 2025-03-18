@@ -1,9 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtsqmof8kraow"]
-
-[ext_resource type="Script" uid="uid://bo4cdldtfqa1b" path="res://Scripts/Enemy/fast_alien.gd" id="1_gw08u"]
+[ext_resource type="Script" uid="uid://cnfaldswv6rb2" path="res://Scripts/Enemy/fast_alien.gd" id="1_gw08u"]
 [ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="2_tdp7v"]
 [ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="3_sw2f2"]
-[ext_resource type="Script" uid="uid://d3s86jcnrbn8f" path="res://Scripts/Enemy/fast_alien_sm.gd" id="4_qinf3"]
+[ext_resource type="Script" uid="uid://bpsx01xafjur3" path="res://Scripts/Enemy/fast_alien_sm.gd" id="4_qinf3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upugl"]
 size = Vector2(24.2, 11.4)

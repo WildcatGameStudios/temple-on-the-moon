@@ -45,28 +45,45 @@ func state_logic(delta) :
 		states.Idle : 
 			parent.walk(delta)
 			parent.move(delta)
+			
+			if Input.is_action_pressed("Attack") : 
+				parent.attack()
 		states.Walk : 
 			# Walk handles the horizontal input, then move handles animation and move and slide 
 			parent.walk(delta)
 			parent.move(delta)
 			
+			if Input.is_action_pressed("Attack") : 
+				parent.attack()
+			
 		states.Jump : 
 			# same logic actually as walk state 
-			parent.walk(delta)
+			parent.jump_walk(delta)
 			parent.move(delta)
+			parent.frames_since_jump += 1
+			
+			if Input.is_action_pressed("Attack") : 
+				parent.attack()
 		
 		states.Fall : 
-			parent.walk(delta)
+			parent.jump_walk(delta)
 			parent.fall()
 			parent.move(delta)
+			parent.frames_since_jump += 1
+			
+			if Input.is_action_pressed("Attack") : 
+				parent.attack()
 			
 		states.ChargeJump : 
 			parent.charge_jump(delta)
+			
 		states.FastFall : 
-			parent.walk(delta)
+			parent.jump_walk(delta)
 			parent.fall()
 			parent.fast_fall(delta)
 			parent.move(delta)
+			parent.frames_since_jump += 1
+			
 		states.Dash : 
 			parent.move(delta)
 		states.Hit :
@@ -140,6 +157,10 @@ func get_transition(delta) :
 				return states.Die
 			if parent.was_hit() :
 				return states.Hit
+			if Input.is_action_pressed("Jump") and previous_state != states.Jump: 
+				if parent.frames_since_jump < parent.jump_catch_frames : 
+					print(parent.frames_since_jump)
+					return states.Jump
 			if Input.is_action_just_pressed("Dash") and parent.can_dash :
 				return states.Dash
 			if Input.is_action_just_pressed("Fast_Fall") or Input.is_action_pressed("Fast_Fall"): 
@@ -220,6 +241,8 @@ func enter_state(new_state, old_state) :
 				parent.reset_jump()
 			parent.play_anim("walk")
 		states.Jump : 
+			if old_state == states.Fall or old_state == states.FastFall : 
+				parent.reset_jump()
 			parent.play_anim("jump")
 			parent.jump()
 		states.Fall : 
@@ -250,12 +273,12 @@ func exit_state(old_state, new_state) :
 		states.Jump : 
 			pass
 		states.Fall : 
-			pass
+			parent.frames_since_jump = 0
 		states.ChargeJump : 
 			print(parent.frames_since_jump_press)
 			parent.frames_since_jump_press = 0
 		states.FastFall : 
-			pass
+			parent.frames_since_jump = 0
 		states.Dash : 
 			pass
 		states.Hit :

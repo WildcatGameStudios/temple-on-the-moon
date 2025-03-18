@@ -4,6 +4,7 @@ class_name Hitbox
 
 var blacklist: Array[Hurtbox]
 var collisions: Array[Hurtbox]
+var sleeping_collisions : Array[Hurtbox]
 
 var cooling_down: bool = false
 
@@ -27,6 +28,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	check_sleeping_collisions()
+	
 	if not self.collisions.is_empty() and not cooling_down:
 		var origin: Vector2 = Vector2.ZERO
 		var damage: int = -1 # negative damage is invalid
@@ -39,6 +42,8 @@ func _process(delta: float) -> void:
 		hit.emit(origin, damage, knockback)
 		cooling_down = true
 		$cooldown.start()
+		
+		
 
 ## add_blacklist
 ## This function adds a Hurtbox to the current blacklisted hurtboxes. A
@@ -55,18 +60,34 @@ func remove_blacklist(target: Hurtbox):
 		self.blacklist.erase(target)
 
 func _on_area_entered(area: Area2D) -> void:
+	print("Hitbox entered")
 	if is_instance_of(area, Hurtbox):
 		if not self.collisions.has(area) and \
 			not self.blacklist.has(area) and \
 			area.enabled and \
 			not self.blacklist_type.has(area.type):
 			self.collisions.append(area)
+		elif not self.collisions.has(area) and \
+			not self.blacklist.has(area) and \
+			not area.enabled and \
+			not self.blacklist_type.has(area.type):
+				print("Sleeping collision added")
+				self.sleeping_collisions.append(area)
+
+func check_sleeping_collisions () : 
+	for i in sleeping_collisions.size() : 
+		if sleeping_collisions[i].enabled : 
+			collisions.append(sleeping_collisions[i])
+			sleeping_collisions.remove_at(i)
+
 
 ## TODO: what happens if a hurtbox despawns while inside a hitbox??
 func _on_area_exited(area: Area2D) -> void:
 	if is_instance_of(area, Hurtbox):
 		if self.collisions.has(area):
 			self.collisions.erase(area)
+		if self.sleeping_collisions.has(area) : 
+			self.sleeping_collisions.erase(area)
 
 
 func _on_cooldown_timeout() -> void:
