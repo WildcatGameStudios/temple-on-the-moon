@@ -66,7 +66,7 @@ position = Vector2(0, 22)
 shape = SubResource("CapsuleShape2D_ypdb4")
 
 [node name="staff" parent="." instance=ExtResource("5_htcer")]
-position = Vector2(58, 101)
+position = Vector2(120, 139)
 
 [connection signal="timeout" from="timers/dash_reset_timer" to="." method="_on_dash_reset_timer_timeout"]
 [connection signal="timeout" from="timers/dash_timer" to="." method="_on_dash_timer_timeout"]

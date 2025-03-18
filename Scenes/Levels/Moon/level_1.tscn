@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://kf6gjdwyosx6"]
+[gd_scene load_steps=9 format=4 uid="uid://kf6gjdwyosx6"]
 
 [ext_resource type="TileSet" uid="uid://bgs6qd1bp27v5" path="res://Resources/Tilesets/test_set.tres" id="1_d6sa3"]
 [ext_resource type="PackedScene" uid="uid://ch0ngvub8x32f" path="res://Scenes/Player/player.tscn" id="2_rp8ub"]
 [ext_resource type="PackedScene" uid="uid://cv6jbsmnim731" path="res://Scenes/Enemy/basic_rock.tscn" id="3_rp8ub"]
 [ext_resource type="PackedScene" uid="uid://gexjkq53t07f" path="res://Scenes/Enemy/advanced_rock_alien.tscn" id="4_a5w8t"]
 [ext_resource type="Script" path="res://Scripts/General/hurtbox.gd" id="5_emiou"]
+[ext_resource type="PackedScene" uid="uid://btvgdutwlbor5" path="res://Scenes/Objects/basic_collectable.tscn" id="6_3c458"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5w8t"]
 size = Vector2(40.202, 20)
@@ -115,3 +116,14 @@ hurt_damage = 100
 position = Vector2(19788.5, 463.7)
 scale = Vector2(125.12, 28.16)
 shape = SubResource("RectangleShape2D_3c458")
+
+[node name="Collectables" type="Node2D" parent="."]
+
+[node name="basic_collectable" parent="Collectables" instance=ExtResource("6_3c458")]
+position = Vector2(2832, -679)
+
+[node name="basic_collectable2" parent="Collectables" instance=ExtResource("6_3c458")]
+position = Vector2(3182, -681)
+
+[node name="basic_collectable3" parent="Collectables" instance=ExtResource("6_3c458")]
+position = Vector2(3569, -680)

@@ -60,7 +60,6 @@ func remove_blacklist(target: Hurtbox):
 		self.blacklist.erase(target)
 
 func _on_area_entered(area: Area2D) -> void:
-	print("Hitbox entered")
 	if is_instance_of(area, Hurtbox):
 		if not self.collisions.has(area) and \
 			not self.blacklist.has(area) and \
