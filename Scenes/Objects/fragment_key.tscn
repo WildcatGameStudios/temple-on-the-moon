@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://clsrryoby3epg"]
+
+[ext_resource type="Script" uid="uid://pmxgq4fkuhfj" path="res://Scripts/Objects/fragment_key.gd" id="1_cx6cg"]
+[ext_resource type="SpriteFrames" uid="uid://bvm6dtusy3x1d" path="res://Resources/Spriteframes/fragmentkey.tres" id="2_246v3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1mxx0"]
+radius = 43.4166
+
+[node name="fragment_key" type="Sprite2D"]
+script = ExtResource("1_cx6cg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(32, -32)
+sprite_frames = ExtResource("2_246v3")
+animation = &"idle"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(31, -34)
+shape = SubResource("CircleShape2D_1mxx0")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

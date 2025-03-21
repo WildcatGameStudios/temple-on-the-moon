@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://dcgbwrg4wm7jw"]
+
+[ext_resource type="Script" uid="uid://ednsioq62jy" path="res://Scripts/Enemy/basic_alien.gd" id="1_60u1a"]
+[ext_resource type="SpriteFrames" uid="uid://boejq8jbw8bhl" path="res://Resources/Spriteframes/basic_rock.tres" id="1_cusrn"]
+[ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="2_jspq0"]
+[ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="3_m40sg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7fjc"]
+radius = 16.0
+height = 70.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wbrrr"]
+radius = 39.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btra5"]
+radius = 54.231
+
+[node name="basic_alien" type="CharacterBody2D"]
+script = ExtResource("1_60u1a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 36)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_p7fjc")
+
+[node name="body" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.402743, 1, 0.567274, 1)
+sprite_frames = ExtResource("1_cusrn")
+animation = &"die"
+
+[node name="hurtbox" parent="." instance=ExtResource("2_jspq0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_wbrrr")
+
+[node name="hitbox" parent="." instance=ExtResource("3_m40sg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_btra5")
+
+[node name="raycast" type="Node2D" parent="."]
+
+[node name="raycast_left" type="RayCast2D" parent="raycast"]
+position = Vector2(-30, 0)
+target_position = Vector2(-50, 0)
+
+[node name="raycast_right" type="RayCast2D" parent="raycast"]
+position = Vector2(30, 0)
+target_position = Vector2(50, 0)
+
+[node name="raycast_right_down" type="RayCast2D" parent="raycast"]
+position = Vector2(80, 0)
+target_position = Vector2(0, 100)
+
+[node name="raycast_left_down" type="RayCast2D" parent="raycast"]
+position = Vector2(-80, 0)
+target_position = Vector2(0, 100)
+
+[connection signal="animation_finished" from="body" to="." method="_on_body_animation_finished"]
