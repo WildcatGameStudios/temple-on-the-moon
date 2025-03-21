@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch0ngvub8x32f"]
+[gd_scene load_steps=7 format=3 uid="uid://ch0ngvub8x32f"]
 
 [ext_resource type="SpriteFrames" uid="uid://dtqm2ruysk0tk" path="res://Resources/Spriteframes/player.tres" id="1_eks58"]
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_ymc8e"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine.gd" id="3_ao45h"]
 [ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="4_u6vjy"]
-[ext_resource type="PackedScene" uid="uid://ic1cm30n0x0y" path="res://Scenes/Player/staff.tscn" id="5_htcer"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvcag"]
 radius = 29.0
@@ -14,18 +13,13 @@ height = 228.0
 radius = 29.0
 height = 188.0
 
-[node name="player" type="CharacterBody2D"]
-position = Vector2(2, 2)
+[node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_ymc8e")
 max_jump_height = 5.0
 time_to_peak = 0.75
-charge_jump_max_height = 8
 fall_speed_boost = 0.75
 fast_fall_speed_boost = 20.0
-dash_duration = 0.3
-dash_distance = 7.0
-jump_catch_frames = 10
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_eks58")
@@ -53,9 +47,7 @@ offset_bottom = -124.0
 [node name="hit_stun_timer" type="Timer" parent="timers"]
 wait_time = 0.3
 
-[node name="attack_cooldown_timer" type="Timer" parent="timers"]
-
-[node name="hitbox" parent="." instance=ExtResource("4_u6vjy")]
+[node name="hitbox" parent="." groups=["player"] instance=ExtResource("4_u6vjy")]
 scale = Vector2(1.16, 1)
 collision_layer = 1
 collision_mask = 1
@@ -65,11 +57,13 @@ blacklist_type = Array[int]([0])
 position = Vector2(0, 22)
 shape = SubResource("CapsuleShape2D_ypdb4")
 
+<<<<<<< HEAD
 [node name="staff" parent="." instance=ExtResource("5_htcer")]
 position = Vector2(120, 139)
 
+=======
+>>>>>>> 477d59a0036bbfa167bca2e4d04f7a1e6e0bcb14
 [connection signal="timeout" from="timers/dash_reset_timer" to="." method="_on_dash_reset_timer_timeout"]
 [connection signal="timeout" from="timers/dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="timers/hit_stun_timer" to="." method="_on_hit_stun_timer_timeout"]
-[connection signal="timeout" from="timers/attack_cooldown_timer" to="." method="_on_attack_cooldown_timer_timeout"]
 [connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]
