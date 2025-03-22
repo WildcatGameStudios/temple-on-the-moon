@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw6qd382p3jne"]
+
+[ext_resource type="Script" uid="uid://qfphkp804loe" path="res://Scripts/UI/player_ui.gd" id="1_7jiju"]
+[ext_resource type="FontFile" uid="uid://8e5e2n58jrlg" path="res://Art/UI/Fonts/PixelOperator8-Bold.ttf" id="2_t3flm"]
+
+[node name="player_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7jiju")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="score_label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t3flm")
+text = "Score : 0000000"
+
+[node name="fragments_label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t3flm")
+text = " : 0 / 3"
+
+[node name="health_text_label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t3flm")
+text = "Health : 4 / 4"
+
+[node name="charge_jump_label" type="Label" parent="VBoxContainer/HBoxContainer"]
+modulate = Color(1, 0.152845, 0.408526, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t3flm")
+text = "CHARGE MAX"
+
+[node name="dash_label" type="Label" parent="VBoxContainer/HBoxContainer"]
+modulate = Color(0, 0.667684, 0.405583, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t3flm")
+text = "DASH READY"
+
+[node name="attack_label" type="Label" parent="VBoxContainer/HBoxContainer"]
+modulate = Color(0, 0.667684, 0.405583, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t3flm")
+text = "ATTACK READY"

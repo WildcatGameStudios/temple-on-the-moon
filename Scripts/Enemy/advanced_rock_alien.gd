@@ -7,15 +7,26 @@ extends Enemy
 @onready var ray_cast_dr: RayCast2D = $raycast/rayCastDR
 @onready var ray_cast_at_player: RayCast2D = $raycast/rayCastAtPlayer
 
-@export var strafeSpeed = 100 # walk state speed
-@export var rollSpeed = 500 # roll state speed
-@export var minXRollDistance = 750
-@export var minYRollDistance = 100 # if player is within these x and y distances, it will charge
+@export var strafeSpeed = 1 # walk state speed
+@export var rollSpeed = 12 # roll state speed
+@export var minXRollDistance = 10
+@export var minYRollDistance = 10 # if player is within these x and y distances, it will charge
 @export var pullInTime = 1 # time (s) it spends pulling in before roll
 @export var direction = 1 # set starting direction, -1 for left, 1 for right
 @export var printStateChange = true # will be removed, print state change in console
 var timer
 var state = "walk"
+
+
+var tile_scale : int = 128
+
+func _ready() -> void: 
+	
+	# convert speeds to pixles for units
+	rollSpeed *= tile_scale
+	minXRollDistance *= tile_scale
+	minYRollDistance *= tile_scale
+	strafeSpeed *= tile_scale
 
 func _physics_process(delta: float) -> void:
 	#if health <= 0:

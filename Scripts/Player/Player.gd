@@ -51,6 +51,8 @@ extends CharacterBody2D
 @onready var attack_cooldown_timer: Timer = $timers/attack_cooldown_timer
 @onready var weapon: AnimatedSprite2D = $weapon
 @onready var hurtbox: Hurtbox = $hurtbox
+@onready var player_ui: Control = $player_ui
+
 
 
 #general variables 
@@ -72,8 +74,10 @@ var temp_jump_power = 0  :
 	set (new_value) : 
 		if new_value < charge_jump_max_strength : 
 			print("Catching jump")
+			player_ui.set_charge_max(true)
 			temp_jump_power = charge_jump_max_strength
 		else : 
+			player_ui.set_charge_max(false)
 			temp_jump_power = new_value
 var temp_gravity_power = 0
 var frames_since_jump_press : int = 0
@@ -95,7 +99,10 @@ var health : int = 4
 var frames_since_jump = 0 
 
 # attack variables
-var attack_ready : bool = true
+var attack_ready : bool = true : 
+	set (new_val) : 
+		player_ui.set_attack_ready(new_val)
+		attack_ready = new_val
 
 
 
@@ -118,7 +125,6 @@ func _ready() -> void:
 	walk_speed = walk_speed_tiles  * tile_scale
 	var time_down = sqrt( 2 * (max_jump_height * tile_scale) / ( (gravity) +   (gravity * fall_speed_boost)) )
 	jump_walk_speed = (horizontal_jump_dist * tile_scale) / (time_to_peak + time_down)
-	print(jump_walk_speed)
 	
 	# calculate dash variables
 	dash_per_second = (dash_distance * tile_scale) / dash_duration
@@ -146,6 +152,7 @@ func reset_dash () :
 	current_dash_time = 0
 	velocity.x -= temp_dash
 	can_dash = false
+	player_ui.set_dash_ready(false)
 	dash_reset_timer.start()
 
 
@@ -286,6 +293,7 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_dash_reset_timer_timeout() -> void:
 	can_dash = true
+	player_ui.set_dash_ready(true)
 
 
 func player () :

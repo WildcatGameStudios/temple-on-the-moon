@@ -5,10 +5,10 @@
 
 [node name="advanced_rock_alien" instance=ExtResource("1_x4mna")]
 script = ExtResource("2_pf0ph")
-strafeSpeed = 100
-rollSpeed = 1500
-minXRollDistance = 750
-minYRollDistance = 100
+strafeSpeed = 1
+rollSpeed = 20
+minXRollDistance = 10
+minYRollDistance = 10
 pullInTime = 1
 direction = 1
 printStateChange = true

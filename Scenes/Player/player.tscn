@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ch0ngvub8x32f"]
+[gd_scene load_steps=11 format=3 uid="uid://ch0ngvub8x32f"]
 
 [ext_resource type="SpriteFrames" uid="uid://dtqm2ruysk0tk" path="res://Resources/Spriteframes/player.tres" id="1_eks58"]
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_ymc8e"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="4_u6vjy"]
 [ext_resource type="SpriteFrames" uid="uid://djau6tjdxiorl" path="res://Resources/Spriteframes/staff_swing.tres" id="5_htcer"]
 [ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="6_dd0ac"]
+[ext_resource type="PackedScene" uid="uid://bw6qd382p3jne" path="res://Scenes/UI/player_ui.tscn" id="7_0u5uq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvcag"]
 radius = 29.0
@@ -21,13 +22,14 @@ size = Vector2(513.5, 232)
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_ymc8e")
-horizontal_jump_dist = 6
+horizontal_jump_dist = 7
 time_to_peak = 0.5
 charge_jump_max_time = 1.0
 fall_speed_boost = 0.75
 fast_fall_speed_boost = 20.0
-dash_duration = 0.2
+dash_duration = 0.33
 dash_distance = 8.0
+jump_catch_frames = 20
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_eks58")
@@ -83,6 +85,16 @@ enabled = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(256, 0)
 shape = SubResource("RectangleShape2D_0u5uq")
+
+[node name="player_ui" parent="." instance=ExtResource("7_0u5uq")]
+offset_left = -1389.0
+offset_top = -779.0
+offset_right = -1389.0
+offset_bottom = -779.0
+scale = Vector2(2, 2)
+
+[node name="camera" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
 
 [connection signal="timeout" from="timers/dash_reset_timer" to="." method="_on_dash_reset_timer_timeout"]
 [connection signal="timeout" from="timers/dash_timer" to="." method="_on_dash_timer_timeout"]
