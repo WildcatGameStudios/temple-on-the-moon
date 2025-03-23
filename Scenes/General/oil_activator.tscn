@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c04tvjc2rn5gg"]
+
+[ext_resource type="Script" uid="uid://dr65ng3iml6vu" path="res://Scripts/Enemy/oil_activator.gd" id="1_m8aet"]
+
+[node name="oil_activator" type="Node2D"]
+script = ExtResource("1_m8aet")
+metadata/_custom_type_script = "uid://dr65ng3iml6vu"

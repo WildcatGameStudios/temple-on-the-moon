@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=4 uid="uid://ce40yi1g64q4h"]
+[gd_scene load_steps=11 format=4 uid="uid://ce40yi1g64q4h"]
 
 [ext_resource type="PackedScene" uid="uid://ch0ngvub8x32f" path="res://Scenes/Player/player.tscn" id="1_i82st"]
 [ext_resource type="PackedScene" uid="uid://cv6jbsmnim731" path="res://Scenes/Enemy/basic_rock.tscn" id="2_jt8px"]
 [ext_resource type="TileSet" uid="uid://bgs6qd1bp27v5" path="res://Resources/Tilesets/test_set.tres" id="2_njfcn"]
 [ext_resource type="PackedScene" uid="uid://dcgbwrg4wm7jw" path="res://Scenes/Enemy/basic_alien.tscn" id="4_4dm3v"]
-[ext_resource type="Script" path="res://Scripts/General/hurtbox.gd" id="4_wqgwo"]
+[ext_resource type="Script" uid="uid://cdo2j6y61n02u" path="res://Scripts/General/hurtbox.gd" id="4_wqgwo"]
 [ext_resource type="TileSet" uid="uid://fd2c2ax15lyu" path="res://Resources/Tilesets/moon_rocks.tres" id="5_l0kvj"]
 [ext_resource type="PackedScene" uid="uid://cxjjy7aw3bmrv" path="res://Scenes/Enemy/rover.tscn" id="7_5m3aj"]
 [ext_resource type="PackedScene" uid="uid://gexjkq53t07f" path="res://Scenes/Enemy/advanced_rock_alien.tscn" id="8_7k7ss"]
+[ext_resource type="PackedScene" uid="uid://cudrkotij3y62" path="res://Scenes/Enemy/oil.tscn" id="8_fvnad"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1igf"]
 size = Vector2(7006, 1345)
@@ -52,3 +53,6 @@ position = Vector2(2203, 66)
 
 [node name="advanced_rock_alien" parent="." instance=ExtResource("8_7k7ss")]
 position = Vector2(1517, -239)
+
+[node name="oil" parent="." instance=ExtResource("8_fvnad")]
+position = Vector2(1996, 119)

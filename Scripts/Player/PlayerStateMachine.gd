@@ -12,6 +12,7 @@ func _ready() -> void:
 	add_state("FastFall")
 	add_state("Dash")
 	add_state("Hit")
+	add_state("Aim")
 	add_state("Die")
 	
 	await get_tree().create_timer(0.01).timeout
@@ -89,6 +90,9 @@ func state_logic(delta) :
 		states.Hit :
 			parent.fall()
 			parent.move(delta)
+		states.Aim:
+			parent.aim(delta)
+			parent.move(delta)
 		states.Die : 
 			pass
 			
@@ -114,6 +118,8 @@ func get_transition(delta) :
 					return states.ChargeJump
 			if Input.get_axis("Walk_Left","Walk_Right") != 0 : 
 				return states.Walk
+			if Input.is_action_just_pressed("Aim"):
+				return states.Aim
 			
 			# If nothing
 			return null
@@ -133,6 +139,8 @@ func get_transition(delta) :
 					return states.ChargeJump
 			if Input.get_axis("Walk_Left","Walk_Right") == 0 : 
 				return states.Idle
+			if Input.is_action_just_pressed("Aim"): # dubious
+				return states.Aim
 			
 			return null
 			
@@ -218,7 +226,10 @@ func get_transition(delta) :
 				return states.Die
 			if not parent.was_hit():
 				return states.Fall
-	
+		states.Aim:
+			if not Input.is_action_pressed("Aim"):
+				parent.clear_aim_line()
+				return states.Idle
 		states.Die : 
 			pass
 	
@@ -260,6 +271,8 @@ func enter_state(new_state, old_state) :
 			parent.play_anim("dash")
 		states.Hit :
 			parent.play_anim("hit")
+		states.Aim:
+			parent.init_aim_line()
 		states.Die : 
 			parent.play_anim("die")
 
@@ -283,5 +296,7 @@ func exit_state(old_state, new_state) :
 			pass
 		states.Hit :
 			pass
+		states.Aim:
+			parent.clear_aim_line()
 		states.Die : 
 			pass

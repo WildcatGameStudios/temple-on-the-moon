@@ -53,7 +53,7 @@ extends CharacterBody2D
 @onready var hurtbox: Hurtbox = $hurtbox
 @onready var player_ui: Control = $player_ui
 
-
+var current_projectile: Node
 
 #general variables 
 var tile_scale : int = 128 # pixle width/height of our tiles 
@@ -112,7 +112,7 @@ func _ready() -> void:
 	# set paremeters of child nodes 
 	dash_reset_timer.wait_time = dash_cooldown
 	dash_timer.wait_time = dash_duration
-	attack_cooldown_timer.wait_time = attack_cooldown
+	#attack_cooldown_timer.wait_time = attack_cooldown
 	
 	#calculate jump variables 
 	gravity = (2 * (max_jump_height * tile_scale)) / (time_to_peak * time_to_peak) 
@@ -131,6 +131,10 @@ func _ready() -> void:
 	
 	# enable player to take damage
 	$hitbox.monitoring = true
+	
+	# create projectile
+	current_projectile = preload("res://Scenes/Player/projectile.tscn").instantiate()
+	current_projectile.position = position
 
 func play_anim (animation : String) -> void :
 	sprite.play(animation)
@@ -317,3 +321,48 @@ func _on_attack_cooldown_timer_timeout() -> void:
 func _on_weapon_animation_finished() -> void:
 	weapon.visible = false
 	hurtbox.enabled = false
+
+
+var aim_line: Line2D = Line2D.new()
+var curr_aim_angle: float = 0.0:
+	set(v):
+		if v < -PI/2:
+			v = -PI/2
+		if v > PI/2:
+			v = PI/2
+		curr_aim_angle = v
+const ANGULAR_VELOCITY: float = 2.0
+
+func init_aim_line() -> void:
+	aim_line.add_point(Vector2.ZERO)
+	aim_line.add_point(Vector2(1000.0, 0))
+	aim_line.default_color = Color.MEDIUM_PURPLE
+	add_child(aim_line)
+
+func aim(delta: float) -> void:
+	# move camera?
+	
+	if Input.is_action_pressed("Aim_Up"):
+		curr_aim_angle += ANGULAR_VELOCITY * delta
+		
+	if Input.is_action_pressed("Aim_Down"):
+		curr_aim_angle -= ANGULAR_VELOCITY * delta
+	
+	var real_angle: float
+	
+	if sprite.flip_h:
+		real_angle = PI - curr_aim_angle
+	else:
+		real_angle = curr_aim_angle
+	
+	aim_line.points[1] = Vector2(cos(real_angle), -sin(real_angle)) * 1000
+	
+	if Input.is_action_just_pressed("Jump"):
+		current_projectile.reset()
+		current_projectile.position = position
+		current_projectile.direction = Vector2(cos(real_angle), -sin(real_angle))
+		get_parent().add_child(current_projectile)
+
+func clear_aim_line() -> void:
+	aim_line.clear_points()
+	remove_child(aim_line)

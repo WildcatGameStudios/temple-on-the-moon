@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cudrkotij3y62"]
+
+[ext_resource type="PackedScene" uid="uid://cvm1ewio2b6uf" path="res://Scenes/Enemy/enemy.tscn" id="1_hjonr"]
+[ext_resource type="Script" uid="uid://bn81p615j4xqy" path="res://Scripts/Enemy/oil.gd" id="2_75p68"]
+[ext_resource type="Script" uid="uid://kwtvvfvighkp" path="res://Scripts/Enemy/oil_state_machine.gd" id="3_75p68"]
+[ext_resource type="SpriteFrames" uid="uid://dqgvbdadqv8k7" path="res://Resources/Spriteframes/oil_base.tres" id="3_utwou"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_utwou"]
+radius = 29.0
+height = 112.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7hfic"]
+radius = 37.478
+height = 113.069
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2nr1p"]
+radius = 29.0
+height = 118.0
+
+[node name="oil" instance=ExtResource("1_hjonr")]
+script = ExtResource("2_75p68")
+activation_distance = 400.0
+
+[node name="enemy_collider" parent="." index="0"]
+rotation = 0.0
+shape = SubResource("CapsuleShape2D_utwou")
+disabled = true
+
+[node name="hitbox_collider" parent="hitbox" index="1"]
+shape = SubResource("CapsuleShape2D_7hfic")
+
+[node name="hurtbox_collider" parent="hurtbox" index="0"]
+rotation = 0.0
+shape = SubResource("CapsuleShape2D_2nr1p")
+
+[node name="animation" parent="." index="4"]
+sprite_frames = ExtResource("3_utwou")
+animation = &"emerge"
+
+[node name="state_machine" type="Node" parent="." index="6"]
+script = ExtResource("3_75p68")
+metadata/_custom_type_script = "uid://cgmkttqs6thtt"
+
+[connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]
+[connection signal="animation_finished" from="animation" to="." method="_on_animation_finished"]
+[connection signal="frame_changed" from="animation" to="." method="_on_frame_changed"]
