@@ -292,9 +292,6 @@ position = Vector2(22570, 726)
 [node name="basic_collectable30" parent="Collectables" instance=ExtResource("6_3c458")]
 position = Vector2(22920, 724)
 
-[node name="basic_collectable31" parent="Collectables" instance=ExtResource("6_3c458")]
-position = Vector2(23302, 733)
-
 [node name="basic_collectable100" parent="Collectables" instance=ExtResource("6_3c458")]
 position = Vector2(23955, 450)
 
@@ -616,7 +613,7 @@ position = Vector2(11340, -1416)
 position = Vector2(23123, 740)
 
 [node name="fragment_key3" parent="fragments" instance=ExtResource("8_wt2yu")]
-position = Vector2(52563, -527)
+position = Vector2(51750, -3961)
 
 [node name="level_clock" type="Timer" parent="."]
 
