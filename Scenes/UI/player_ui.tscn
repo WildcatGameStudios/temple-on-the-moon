@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw6qd382p3jne"]
+[gd_scene load_steps=4 format=3 uid="uid://bw6qd382p3jne"]
 
 [ext_resource type="Script" uid="uid://qfphkp804loe" path="res://Scripts/UI/player_ui.gd" id="1_7jiju"]
 [ext_resource type="FontFile" uid="uid://8e5e2n58jrlg" path="res://Art/UI/Fonts/PixelOperator8-Bold.ttf" id="2_t3flm"]
+[ext_resource type="SpriteFrames" uid="uid://bvm6dtusy3x1d" path="res://Resources/Spriteframes/fragmentkey.tres" id="3_t3flm"]
 
 [node name="player_ui" type="Control"]
 layout_mode = 3
@@ -28,6 +29,12 @@ alignment = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_t3flm")
 text = "Score : 0000000"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/HBoxContainer"]
+position = Vector2(289, 10)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("3_t3flm")
+animation = &"idle"
 
 [node name="fragments_label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2

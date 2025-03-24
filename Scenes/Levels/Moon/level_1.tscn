@@ -5,12 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://ch0ngvub8x32f" path="res://Scenes/Player/player.tscn" id="2_rp8ub"]
 [ext_resource type="PackedScene" uid="uid://cv6jbsmnim731" path="res://Scenes/Enemy/basic_rock.tscn" id="3_rp8ub"]
 [ext_resource type="PackedScene" uid="uid://gexjkq53t07f" path="res://Scenes/Enemy/advanced_rock_alien.tscn" id="4_a5w8t"]
-[ext_resource type="Script" uid="uid://cdo2j6y61n02u" path="res://Scripts/General/hurtbox.gd" id="5_emiou"]
+[ext_resource type="Script" path="res://Scripts/General/hurtbox.gd" id="5_emiou"]
 [ext_resource type="PackedScene" uid="uid://btvgdutwlbor5" path="res://Scenes/Objects/basic_collectable.tscn" id="6_3c458"]
 [ext_resource type="PackedScene" uid="uid://clsrryoby3epg" path="res://Scenes/Objects/fragment_key.tscn" id="8_wt2yu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5w8t"]
-size = Vector2(40.202, 20)
+size = Vector2(41.6159, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3c458"]
 size = Vector2(413.499, 52.9332)
@@ -40,7 +40,7 @@ position = Vector2(12245, -721)
 position = Vector2(13957, -1465)
 
 [node name="basic_rock20" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(23033, -1073)
+position = Vector2(23037, -1134)
 
 [node name="basic_rock21" parent="enemies" instance=ExtResource("3_rp8ub")]
 position = Vector2(21712, -1082)
@@ -112,67 +112,67 @@ position = Vector2(21430, 850)
 scale = Vector2(0.99785, 1.00732)
 
 [node name="basic_rock22" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(26384, -3115)
+position = Vector2(26489, -3260)
 
 [node name="basic_rock23" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(25932, -3114)
+position = Vector2(26027, -3218)
 
 [node name="basic_rock24" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(28851, -1065)
+position = Vector2(28741, -1141)
 
 [node name="basic_rock25" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(30791, -45)
+position = Vector2(30724, -120)
 
 [node name="basic_rock26" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(32470, 221)
+position = Vector2(32408, 144)
 
 [node name="basic_rock27" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(33031, 221)
+position = Vector2(33089, 106)
 
 [node name="basic_rock28" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(32730, 212)
+position = Vector2(32736, 142)
 
 [node name="basic_rock29" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(32114, 209)
+position = Vector2(32114, 155)
 
 [node name="basic_rock30" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(33452, 218)
+position = Vector2(33462, 124)
 
 [node name="basic_rock31" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(34953, -679)
+position = Vector2(34933, -760)
 
 [node name="basic_rock32" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(35309, -679)
+position = Vector2(35306, -753)
 
 [node name="basic_rock33" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(35626, -671)
+position = Vector2(35626, -743)
 
 [node name="basic_rock34" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(36865, -923)
+position = Vector2(36917, -1064)
 
 [node name="basic_rock35" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(37257, -919)
+position = Vector2(37262, -1051)
 
 [node name="basic_rock36" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(37433, -923)
+position = Vector2(37522, -1046)
 
 [node name="basic_rock37" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(42076, -208)
+position = Vector2(42165, -331)
 
 [node name="basic_rock38" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(42497, -1859)
+position = Vector2(42547, -1909)
 
 [node name="basic_rock39" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(51008, -62)
+position = Vector2(51017, -147)
 
 [node name="basic_rock40" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(51719, -49)
+position = Vector2(51761, -147)
 
 [node name="basic_rock41" parent="enemies" instance=ExtResource("3_rp8ub")]
-position = Vector2(50432, -3873)
+position = Vector2(50434, -3931)
 
 [node name="player" parent="." instance=ExtResource("2_rp8ub")]
-position = Vector2(1527, -243)
+position = Vector2(767, -250)
 dash_cooldown = 1.5
 
 [node name="floor_check" type="StaticBody2D" parent="."]
@@ -180,11 +180,8 @@ position = Vector2(20493, 995)
 scale = Vector2(-84.8714, -6.56133)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor_check"]
-position = Vector2(-0.0353394, 0)
-shape = SubResource("RectangleShape2D_a5w8t")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="floor_check"]
-position = Vector2(-21.4913, 292.319)
+position = Vector2(-0.247406, 0)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_a5w8t")
 
 [node name="KILLZONE" type="Area2D" parent="."]
@@ -198,6 +195,15 @@ scale = Vector2(125.12, 28.16)
 shape = SubResource("RectangleShape2D_3c458")
 
 [node name="Collectables" type="Node2D" parent="."]
+
+[node name="basic_collectable" parent="Collectables" instance=ExtResource("6_3c458")]
+position = Vector2(2832, -679)
+
+[node name="basic_collectable2" parent="Collectables" instance=ExtResource("6_3c458")]
+position = Vector2(3182, -681)
+
+[node name="basic_collectable3" parent="Collectables" instance=ExtResource("6_3c458")]
+position = Vector2(3569, -680)
 
 [node name="basic_collectable5" parent="Collectables" instance=ExtResource("6_3c458")]
 position = Vector2(8064, -708)
@@ -596,6 +602,7 @@ position = Vector2(6460, -662)
 position = Vector2(6675, -660)
 
 [node name="fragments" type="Node2D" parent="."]
+position = Vector2(0, -4)
 
 [node name="fragment_key" parent="fragments" instance=ExtResource("8_wt2yu")]
 position = Vector2(11340, -1416)
@@ -604,15 +611,21 @@ position = Vector2(11340, -1416)
 position = Vector2(23123, 740)
 
 [node name="fragment_key3" parent="fragments" instance=ExtResource("8_wt2yu")]
-position = Vector2(51750, -3961)
+position = Vector2(51751, -3980)
 
 [node name="level_clock" type="Timer" parent="."]
 
-[node name="advanced_rock_alien2" parent="." instance=ExtResource("4_a5w8t")]
+[node name="advanced_rocks" type="Node2D" parent="."]
+
+[node name="advanced_rock_alien2" parent="advanced_rocks" instance=ExtResource("4_a5w8t")]
 position = Vector2(46779, -190)
 
-[node name="advanced_rock_alien3" parent="." instance=ExtResource("4_a5w8t")]
+[node name="advanced_rock_alien3" parent="advanced_rocks" instance=ExtResource("4_a5w8t")]
 position = Vector2(45071, -2366)
 
-[node name="advanced_rock_alien4" parent="." instance=ExtResource("4_a5w8t")]
+[node name="advanced_rock_alien4" parent="advanced_rocks" instance=ExtResource("4_a5w8t")]
 position = Vector2(47485, -2366)
+
+[connection signal="collected" from="fragments/fragment_key" to="." method="_on_fragment_key_collected"]
+[connection signal="collected" from="fragments/fragment_key2" to="." method="_on_fragment_key_2_collected"]
+[connection signal="collected" from="fragments/fragment_key3" to="." method="_on_fragment_key_3_collected"]

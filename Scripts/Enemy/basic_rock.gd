@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var smoke: AnimatedSprite2D = $smoke
 @onready var raycast_l: RayCast2D = $raycast_l
 @onready var raycast_r: RayCast2D = $raycast_r
+@onready var raycast_d: RayCast2D = $raycast_d
+
 
 # export variables for rock 
 @export var health : int = 1 : 
@@ -16,6 +18,7 @@ extends CharacterBody2D
 @export var walk_speed : int = 3
 @export var gravity_multiplyer : int = 5
 @export var damage : int = 1
+@export var score : int = 50
 @export_enum("Left", "Right") var initial_direction = "Left"
 
 # variables 
@@ -63,7 +66,7 @@ func move (delta) -> void:
 		print("error no direction!")
 	
 	#Check if gravity needs to be applied 
-	if !is_on_floor() : 
+	if !is_on_floor() and !raycast_d.is_colliding(): 
 		apply_gravity()
 	
 	# Move the charectar body 
@@ -82,7 +85,7 @@ func check_raycast () -> void :
 	# then update raycast 
 	raycast_l.force_raycast_update()
 	raycast_r.force_raycast_update()
-	
+	raycast_d.force_raycast_update()
 	
 	# then check if either is colliding, and adjust direction accordingly 
 	if raycast_l.is_colliding() : 
@@ -103,6 +106,7 @@ func die () -> void:
 	is_dead = true
 	smoke.visible = false
 	body.play("die")
+	ScoreKeeper.temp_score = score
 	
 
 

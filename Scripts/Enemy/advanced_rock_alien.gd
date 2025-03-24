@@ -1,6 +1,6 @@
 extends Enemy
 
-@onready var player: CharacterBody2D = $"../player"
+@onready var player: CharacterBody2D 
 @onready var ray_cast_l: RayCast2D = $raycast/rayCastL
 @onready var ray_cast_r: RayCast2D = $raycast/rayCastR
 @onready var ray_cast_dl: RayCast2D = $raycast/rayCastDL
@@ -27,6 +27,15 @@ func _ready() -> void:
 	minXRollDistance *= tile_scale
 	minYRollDistance *= tile_scale
 	strafeSpeed *= tile_scale
+	
+	# get player ndoe 
+	var scene_root = get_tree().current_scene
+	
+	var children = scene_root.get_children()
+	
+	for i in children : 
+		if i.has_method("player") : 
+			player = i
 
 func _physics_process(delta: float) -> void:
 	#if health <= 0:

@@ -41,7 +41,7 @@ func set_attack_ready (ready : bool) :
 
 
 func set_health (new_health : int) : 
-	pass
+	health_text_label.text = "Health : %d/4" % [new_health]
 
 
 func set_score(new_score : int) : 

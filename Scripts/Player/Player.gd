@@ -136,6 +136,7 @@ func _ready() -> void:
 	current_projectile = preload("res://Scenes/Player/projectile.tscn").instantiate()
 	current_projectile.position = position
 
+
 func play_anim (animation : String) -> void :
 	sprite.play(animation)
 	
@@ -249,6 +250,7 @@ func dash () :
 	in_dash = true
 	dash_timer.start()
 
+
 func attack () : 
 	#overhaul attack 
 	if attack_ready : 
@@ -263,6 +265,7 @@ func attack () :
 
 func hit (damage: int) : 
 	self.health -= damage
+	player_ui.set_health(health)
 	if self.health <= 0:
 		die()
 	pass
@@ -323,6 +326,20 @@ func _on_weapon_animation_finished() -> void:
 	hurtbox.enabled = false
 
 
+# Wrappers to set UI
+
+func set_score (new_score)  :
+	player_ui.set_score(new_score)
+
+func set_fragments (new_fragments) : 
+	player_ui.set_fragments(new_fragments)
+
+func set_time (new_time) : 
+	pass
+
+func set_level (new_level) : 
+	pass
+
 var aim_line: Line2D = Line2D.new()
 var curr_aim_angle: float = 0.0:
 	set(v):
@@ -333,11 +350,13 @@ var curr_aim_angle: float = 0.0:
 		curr_aim_angle = v
 const ANGULAR_VELOCITY: float = 2.0
 
+
 func init_aim_line() -> void:
 	aim_line.add_point(Vector2.ZERO)
 	aim_line.add_point(Vector2(1000.0, 0))
 	aim_line.default_color = Color.MEDIUM_PURPLE
 	add_child(aim_line)
+
 
 func aim(delta: float) -> void:
 	# move camera?
@@ -362,6 +381,7 @@ func aim(delta: float) -> void:
 		current_projectile.position = position
 		current_projectile.direction = Vector2(cos(real_angle), -sin(real_angle))
 		get_parent().add_child(current_projectile)
+
 
 func clear_aim_line() -> void:
 	aim_line.clear_points()

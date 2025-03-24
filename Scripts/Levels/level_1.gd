@@ -19,9 +19,25 @@ var fragments_collected : int = 0 :
 
 var score : int = 0
 
+
 func _process(delta: float) -> void: 
 	if ScoreKeeper.temp_loaded : 
 		score += ScoreKeeper.temp_score
-		#player_ui.set_score(score)
+		player.set_score(score)
 		ScoreKeeper.temp_score = 0
 		ScoreKeeper.temp_loaded = false
+
+
+func _on_fragment_key_collected() -> void:
+	fragments_collected += 1
+	player.set_fragments(fragments_collected)
+
+
+func _on_fragment_key_2_collected() -> void:
+	fragments_collected += 1
+	player.set_fragments(fragments_collected)
+
+
+func _on_fragment_key_3_collected() -> void:
+	fragments_collected += 1
+	player.set_fragments(fragments_collected)

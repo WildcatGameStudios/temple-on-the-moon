@@ -63,6 +63,9 @@ target_position = Vector2(-50, 0)
 position = Vector2(30, 0)
 target_position = Vector2(50, 0)
 
+[node name="raycast_d" type="RayCast2D" parent="."]
+target_position = Vector2(0, 56)
+
 [node name="noisemaker" type="Node" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
