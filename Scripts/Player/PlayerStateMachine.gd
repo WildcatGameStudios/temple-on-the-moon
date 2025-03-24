@@ -12,7 +12,6 @@ func _ready() -> void:
 	add_state("FastFall")
 	add_state("Dash")
 	add_state("Hit")
-	add_state("Aim")
 	add_state("Die")
 	
 	await get_tree().create_timer(0.01).timeout
@@ -47,15 +46,23 @@ func state_logic(delta) :
 			parent.walk(delta)
 			parent.move(delta)
 			
-			if Input.is_action_pressed("Attack") : 
+			if not parent.aiming and Input.is_action_pressed("Attack") : 
 				parent.attack()
+			if Input.is_action_just_pressed("Aim"):
+				parent.toggle_aiming()
+			if parent.aiming:
+				parent.aim(delta)
 		states.Walk : 
 			# Walk handles the horizontal input, then move handles animation and move and slide 
 			parent.walk(delta)
 			parent.move(delta)
 			
-			if Input.is_action_pressed("Attack") : 
+			if not parent.aiming and Input.is_action_pressed("Attack") : 
 				parent.attack()
+			if Input.is_action_just_pressed("Aim"):
+				parent.toggle_aiming()
+			if parent.aiming:
+				parent.aim(delta)
 			
 		states.Jump : 
 			# same logic actually as walk state 
@@ -90,9 +97,6 @@ func state_logic(delta) :
 		states.Hit :
 			parent.fall()
 			parent.move(delta)
-		states.Aim:
-			parent.aim(delta)
-			parent.move(delta)
 		states.Die : 
 			pass
 			
@@ -118,8 +122,6 @@ func get_transition(delta) :
 					return states.ChargeJump
 			if Input.get_axis("Walk_Left","Walk_Right") != 0 : 
 				return states.Walk
-			if Input.is_action_just_pressed("Aim"):
-				return states.Aim
 			
 			# If nothing
 			return null
@@ -139,8 +141,6 @@ func get_transition(delta) :
 					return states.ChargeJump
 			if Input.get_axis("Walk_Left","Walk_Right") == 0 : 
 				return states.Idle
-			if Input.is_action_just_pressed("Aim"): # dubious
-				return states.Aim
 			
 			return null
 			
@@ -226,10 +226,6 @@ func get_transition(delta) :
 				return states.Die
 			if not parent.was_hit():
 				return states.Fall
-		states.Aim:
-			if not Input.is_action_pressed("Aim"):
-				parent.clear_aim_line()
-				return states.Idle
 		states.Die : 
 			pass
 	
@@ -271,13 +267,19 @@ func enter_state(new_state, old_state) :
 			parent.play_anim("dash")
 		states.Hit :
 			parent.play_anim("hit")
-		states.Aim:
-			parent.init_aim_line()
 		states.Die : 
 			parent.play_anim("die")
 
 
 func exit_state(old_state, new_state) : 
+	match old_state:
+		states.Idle:
+			if parent.aiming and new_state != states.Walk:
+				parent.toggle_aiming()
+		states.Walk:
+			if parent.aiming and new_state != states.Idle:
+				parent.toggle_aiming()
+	
 	match state :
 		states.Idle : 
 			pass
@@ -296,7 +298,5 @@ func exit_state(old_state, new_state) :
 			pass
 		states.Hit :
 			pass
-		states.Aim:
-			parent.clear_aim_line()
 		states.Die : 
 			pass

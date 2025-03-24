@@ -104,8 +104,8 @@ var attack_ready : bool = true :
 		player_ui.set_attack_ready(new_val)
 		attack_ready = new_val
 
-
-
+var aiming: bool = false
+const AIM_LINE_LENGTH: float = 1000.0
   
 # ready function to be called on instance 
 func _ready() -> void:
@@ -350,6 +350,12 @@ var curr_aim_angle: float = 0.0:
 		curr_aim_angle = v
 const ANGULAR_VELOCITY: float = 2.0
 
+func toggle_aiming() -> void:
+	if aiming:
+		clear_aim_line()
+	else:
+		init_aim_line()
+	aiming = not aiming
 
 func init_aim_line() -> void:
 	aim_line.add_point(Vector2.ZERO)
@@ -361,25 +367,18 @@ func init_aim_line() -> void:
 func aim(delta: float) -> void:
 	# move camera?
 	
-	if Input.is_action_pressed("Aim_Up"):
-		curr_aim_angle += ANGULAR_VELOCITY * delta
-		
-	if Input.is_action_pressed("Aim_Down"):
-		curr_aim_angle -= ANGULAR_VELOCITY * delta
+	var curr_mouse_pos = get_global_mouse_position()
+	var to_player = curr_mouse_pos - global_position
 	
-	var real_angle: float
+	var angle = to_player.angle()
 	
-	if sprite.flip_h:
-		real_angle = PI - curr_aim_angle
-	else:
-		real_angle = curr_aim_angle
+	aim_line.points[1] = Vector2(cos(angle), sin(angle)) * AIM_LINE_LENGTH
 	
-	aim_line.points[1] = Vector2(cos(real_angle), -sin(real_angle)) * 1000
-	
-	if Input.is_action_just_pressed("Jump"):
+	if Input.is_action_just_pressed("Attack") and not current_projectile.active:
 		current_projectile.reset()
 		current_projectile.position = position
-		current_projectile.direction = Vector2(cos(real_angle), -sin(real_angle))
+		current_projectile.direction = Vector2(cos(angle), sin(angle))
+		current_projectile.active = true
 		get_parent().add_child(current_projectile)
 
 
