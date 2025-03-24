@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2idd7rv15ktv"]
+
+[ext_resource type="Script" uid="uid://dhilyqfq77nfg" path="res://Scripts/Environment/sign.gd" id="1_4gim0"]
+[ext_resource type="SpriteFrames" uid="uid://coxnqr0wfx6iq" path="res://Resources/Spriteframes/sign_tile.tres" id="1_ax71s"]
+
+[sub_resource type="Gradient" id="Gradient_ax71s"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ue84l"]
+gradient = SubResource("Gradient_ax71s")
+
+[node name="sign_tile" type="AnimatedSprite2D"]
+z_index = 1
+z_as_relative = false
+sprite_frames = ExtResource("1_ax71s")
+script = ExtResource("1_4gim0")
+
+[node name="popup_hint" type="Sprite2D" parent="."]
+z_index = -1
+z_as_relative = false
+position = Vector2(0, -181)
+texture = SubResource("GradientTexture2D_ue84l")
+
+[node name="text_background" type="ColorRect" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -227.0
+offset_top = -231.0
+offset_right = -25.0
+offset_bottom = -122.0
+grow_horizontal = 2
+color = Color(0, 0.286275, 0.443137, 1)
+
+[node name="popup_text" type="RichTextLabel" parent="text_background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -79.0
+offset_top = 17.0
+offset_right = 82.0
+offset_bottom = 98.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "This is a sample sign message!"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

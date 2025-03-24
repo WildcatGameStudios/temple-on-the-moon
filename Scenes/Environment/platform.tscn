@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://clhnxx27ftsii"]
+
+[ext_resource type="PackedScene" uid="uid://c1onp6n3etbo0" path="res://Scenes/General/magic_activator.tscn" id="1_aewg8"]
+[ext_resource type="Script" uid="uid://cmg8m87p1gmi7" path="res://Scripts/Environment/platform.gd" id="1_u817j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48a22"]
+size = Vector2(512, 128)
+
+[node name="platform" type="AnimatableBody2D"]
+script = ExtResource("1_u817j")
+
+[node name="collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_48a22")
+
+[node name="magic_activator" parent="." instance=ExtResource("1_aewg8")]
+
+[connection signal="triggered" from="magic_activator" to="." method="_on_magic_activator_triggered"]

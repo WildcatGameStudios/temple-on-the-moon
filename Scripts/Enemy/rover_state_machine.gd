@@ -10,7 +10,7 @@ func _ready() -> void:
 	add_state("Die")
 	
 	#await get_tree().create_timer(0.01).timeout
-	set_state(states.Roam)
+	set_state(states.Idle)
 
 func _physics_process(delta: float) -> void:
 	var transition = get_transition(delta)
@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 
 func state_logic(delta) -> void:
 	parent.update_raycasts(delta)
-	if Input.is_action_just_pressed("Kill"): 
+	if Input.is_action_just_pressed("Kill") and not state == states.Idle:
 		parent.dead = true
 		return
 	match state:
@@ -41,12 +41,13 @@ func state_logic(delta) -> void:
 			parent.fire(delta)
 			parent.move(delta)
 		states.Die:
-			pass
-	
+			parent.die(delta)
+
 func get_transition(delta):
 	match state:
 		states.Idle:
-			pass
+			if parent.has_oil:
+				return states.Roam
 		states.Roam:
 			if parent.dead:
 				return states.Die
@@ -77,6 +78,9 @@ func get_transition(delta):
 	return null
 	
 func enter_state(new_state, old_state) : 
+	if old_state == states.Idle:
+		$"../hurtbox".enabled = true
+		$"../nozzle/hurtbox".enabled = true
 	match new_state:
 		states.Strafe:
 			parent.strafe_timer = parent.STRAFE_TIME
@@ -93,6 +97,7 @@ func enter_state(new_state, old_state) :
 		states.Die:
 			$"../hurtbox".enabled = false
 			$"../nozzle/hurtbox".enabled = false
+			$"../oil_activator".set_released()
 	print("rover now entering state: ", states.find_key(new_state))
 	pass
 	

@@ -1,13 +1,24 @@
 extends Enemy
 
+@onready var animation: AnimatedSprite2D = $animation
+
 ## Player Scope Radius
 ## The radius in tiles a player must be within in order for a roaming Rover to
 ## begin scoping the player.
 @export var player_scope_radius: float = 12
 
+var has_oil: bool = false
+
 var spawn_point: Vector2
 var player: CharacterBody2D
-var nozzle_angle: float
+var nozzle_angle: float:
+	set(a):
+		if a > 2 * PI:
+			nozzle_angle = a - 2 * PI
+		elif a < 0.0:
+			nozzle_angle = a + 2 * PI
+		else:
+			nozzle_angle = a
 
 # all units of distance are measured in tiles
 
@@ -16,6 +27,8 @@ var reroam_cooldown: float = 2.0
 var roam_time: float = 0.0
 var roam_to_left: bool
 const ROAM_SPEED: float = 1.5
+@onready var df_left: RayCast2D = $raycast/detect_floor_left
+@onready var df_right: RayCast2D = $raycast/detect_floor_right
 
 var strafe_timer: float = 3.0
 const STRAFE_TIME: float = 3.0
@@ -24,13 +37,15 @@ const STRAFE_DISTANCE: float = 8.0
 var strafe_finished: bool = false
 @onready var dp: RayCast2D = $raycast/detect_player
 
+@export var angular_velocity = 3.0
+
 var charge_timer: float = 0.0
 var charge_finished: bool = false
 var CHARGE_TIMEOUT: float = 0.75
 
 var fire_timer: float = 0.0
 var FIRE_TIMEOUT: float = 0.816
-var fire_finished: bool
+var fire_finished: bool = true
 var laser_line: Line2D = Line2D.new()
 var laser_hurtbox: Hurtbox = Hurtbox.new()
 var laser_hurtbox_collider: CollisionShape2D = CollisionShape2D.new()
@@ -46,8 +61,15 @@ func _ready() -> void:
 	laser_hurtbox.hurt_damage = 2
 	laser_hurtbox.knockback = 150
 	
+	$"hurtbox".enabled = false
+	$"nozzle/hurtbox".enabled = false
+	
 func move(delta: float) -> void:
 	velocity.y += ENEMY_GRAVITY * delta
+	if velocity.x > 0.0 and not df_right.is_colliding():
+		velocity.x = 0.0
+	if velocity.x < 0.0 and not df_left.is_colliding():
+		velocity.x = 0.0
 	move_and_slide()
 
 func nozzle_scope_player(delta: float) -> void:
@@ -61,15 +83,17 @@ func nozzle_scope_player(delta: float) -> void:
 	elif angle < 0:
 		angle = 0
 	
-	const ANGULAR_VELOCITY = 1.0
-	
-	var dangle = sign(angle - nozzle_angle) * ANGULAR_VELOCITY
+	var damp = (angle - nozzle_angle) / PI + 0.3
+	var dangle = sign(angle - nozzle_angle) * angular_velocity * damp
 	nozzle_angle += dangle * delta
 	$nozzle/hurtbox.rotation = -nozzle_angle
 
 func update_raycasts(_delta: float) -> void:
 	dp.target_position = player.global_position - global_position
 	dp.force_raycast_update()
+	df_left.force_raycast_update()
+	df_right.force_raycast_update()
+	
 
 # TODO: make TILE_SIZE a global variable (currently a raw 128 number won't suffice)
 func player_in_radius() -> bool:
@@ -143,7 +167,22 @@ func fire(delta: float) -> void:
 		remove_child(laser_hurtbox)
 		
 func die(delta: float) -> void:
-	if delta >= DIE_TIMEOUT:
+	if fire_finished == false:
+		laser_line.clear_points()
+		remove_child(laser_line)
+		remove_child(laser_hurtbox)
+		fire_finished = true
+	if die_timer >= DIE_TIMEOUT:
 		return
-	modulate = Color.hex(0xffffffff * (0.8-die_timer))
+	modulate = Color.hex(0xffffff00 + 0xff * (0.8-die_timer))
 	die_timer += delta
+	#$oil_activator.remove_from_group("oil_activated")
+
+func _on_animation_finished() -> void:
+	animation.stop()
+
+func _on_animation_looped() -> void:
+	animation.stop()
+
+func _on_oil_activator_activated(enemy: Enemy) -> void:
+	has_oil = true

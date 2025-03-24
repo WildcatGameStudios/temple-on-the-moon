@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxjjy7aw3bmrv"]
+[gd_scene load_steps=9 format=3 uid="uid://cxjjy7aw3bmrv"]
 
 [ext_resource type="PackedScene" uid="uid://cvm1ewio2b6uf" path="res://Scenes/Enemy/enemy.tscn" id="1_cfmwh"]
 [ext_resource type="SpriteFrames" uid="uid://bvfgvywg0s7ve" path="res://Resources/Spriteframes/rover_base.tres" id="2_g2fjl"]
 [ext_resource type="Script" path="res://Scripts/Enemy/rover.gd" id="2_ijpbi"]
 [ext_resource type="Script" path="res://Scripts/Enemy/rover_state_machine.gd" id="4_iro2x"]
-[ext_resource type="Script" path="res://Scripts/General/hurtbox.gd" id="4_l33ua"]
+[ext_resource type="Script" uid="uid://cdo2j6y61n02u" path="res://Scripts/General/hurtbox.gd" id="4_l33ua"]
+[ext_resource type="PackedScene" uid="uid://c04tvjc2rn5gg" path="res://Scenes/General/oil_activator.tscn" id="6_ugnci"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qm3ma"]
 
@@ -14,13 +15,23 @@ size = Vector2(148.25, 20)
 [node name="rover" instance=ExtResource("1_cfmwh")]
 script = ExtResource("2_ijpbi")
 player_scope_radius = 12.0
+angular_velocity = 3.0
 
 [node name="detect_player" type="RayCast2D" parent="raycast" index="0"]
 position = Vector2(0, -50)
 collision_mask = 3
 
+[node name="detect_floor_left" type="RayCast2D" parent="raycast" index="1"]
+position = Vector2(-65, 0)
+target_position = Vector2(0, 72)
+
+[node name="detect_floor_right" type="RayCast2D" parent="raycast" index="2"]
+position = Vector2(65, 0)
+target_position = Vector2(0, 72)
+
 [node name="animation" parent="." index="4"]
 sprite_frames = ExtResource("2_g2fjl")
+animation = &"rotate"
 
 [node name="nozzle" type="AnimatedSprite2D" parent="." index="6"]
 position = Vector2(0, -50)
@@ -37,3 +48,9 @@ debug_color = Color(1, 0.00392157, 0.0745098, 0.419608)
 
 [node name="state_machine" type="Node" parent="." index="7"]
 script = ExtResource("4_iro2x")
+
+[node name="oil_activator" parent="." index="8" instance=ExtResource("6_ugnci")]
+
+[connection signal="animation_finished" from="animation" to="." method="_on_animation_finished"]
+[connection signal="animation_looped" from="animation" to="." method="_on_animation_looped"]
+[connection signal="activated" from="oil_activator" to="." method="_on_oil_activator_activated"]

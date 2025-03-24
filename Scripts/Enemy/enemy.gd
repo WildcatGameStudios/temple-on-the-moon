@@ -14,7 +14,7 @@ extends CharacterBody2D
 
 class_name Enemy
 
-const ENEMY_GRAVITY: float = 8.0
+const ENEMY_GRAVITY: float = 800.0
 
 @export var health: int = 2
 
