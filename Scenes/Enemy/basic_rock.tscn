@@ -1,6 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cv6jbsmnim731"]
 
+<<<<<<< Updated upstream
 [ext_resource type="Script" path="res://Scripts/Enemy/basic_rock.gd" id="1_4xsiv"]
+=======
+[ext_resource type="Script" uid="uid://bv178ghpswqam" path="res://Scripts/Enemy/basic_rock.gd" id="1_4xsiv"]
+>>>>>>> Stashed changes
 [ext_resource type="SpriteFrames" uid="uid://boejq8jbw8bhl" path="res://Resources/Spriteframes/basic_rock.tres" id="1_mamag"]
 [ext_resource type="SpriteFrames" uid="uid://bykda5u72kys0" path="res://Resources/Spriteframes/smoke.tres" id="2_qv6lg"]
 [ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="3_1ynn5"]
@@ -50,7 +54,12 @@ shape = SubResource("CircleShape2D_hhqmt")
 
 [node name="hitbox" parent="." instance=ExtResource("4_ekwah")]
 visible = false
+<<<<<<< Updated upstream
 collision_layer = 1
+=======
+collision_layer = 3
+collision_mask = 3
+>>>>>>> Stashed changes
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("CircleShape2D_o3c0e")

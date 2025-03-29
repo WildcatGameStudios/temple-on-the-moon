@@ -21,7 +21,7 @@ dash_duration = 0.2
 dash_distance = 10.0
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-zoom = Vector2(0.7, 0.7)
+zoom = Vector2(0.5, 0.5)
 
 [node name="killbox" type="Area2D" parent="."]
 script = ExtResource("4_wqgwo")
@@ -52,7 +52,11 @@ tile_set = ExtResource("5_l0kvj")
 position = Vector2(2203, 66)
 
 [node name="advanced_rock_alien" parent="." instance=ExtResource("8_7k7ss")]
+<<<<<<< Updated upstream
 position = Vector2(1517, -239)
 
 [node name="oil" parent="." instance=ExtResource("8_fvnad")]
 position = Vector2(1996, 119)
+=======
+position = Vector2(4294, -150)
+>>>>>>> Stashed changes

@@ -114,7 +114,7 @@ func _ready() -> void:
 	dash_timer.wait_time = dash_duration
 	#attack_cooldown_timer.wait_time = attack_cooldown
 	
-	#calculate jump variables 
+	#calculate jump variables
 	gravity = (2 * (max_jump_height * tile_scale)) / (time_to_peak * time_to_peak) 
 	jump_strength = -gravity * time_to_peak
 	charge_jump_max_strength =  -1 * (((charge_jump_max_height * 128) / time_to_peak ) + (0.5 * gravity * time_to_peak))

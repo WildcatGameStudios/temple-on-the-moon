@@ -1,7 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dcgbwrg4wm7jw"]
 
+<<<<<<< Updated upstream
 [ext_resource type="Script" path="res://Scripts/Enemy/basic_alien.gd" id="1_60u1a"]
 [ext_resource type="SpriteFrames" uid="uid://by7amnis3lgdg" path="res://Resources/Spriteframes/basic_alien.tres" id="2_6jtow"]
+=======
+[ext_resource type="Script" uid="uid://cygfjqt5a78sk" path="res://Scripts/Enemy/basic_alien.gd" id="1_60u1a"]
+[ext_resource type="SpriteFrames" uid="uid://boejq8jbw8bhl" path="res://Resources/Spriteframes/basic_rock.tres" id="1_cusrn"]
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="2_jspq0"]
 [ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="3_m40sg"]
 
