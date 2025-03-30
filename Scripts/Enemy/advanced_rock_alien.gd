@@ -6,26 +6,20 @@ extends Enemy
 @onready var ray_cast_dl: RayCast2D = $raycast/rayCastDL
 @onready var ray_cast_dr: RayCast2D = $raycast/rayCastDR
 @onready var ray_cast_at_player: RayCast2D = $raycast/rayCastAtPlayer
-@onready var advanced_rock_walk: Sprite2D = $AdvancedRockWalk
+@onready var sprite: AnimatedSprite2D = $sprite
+@onready var smoke: AnimatedSprite2D = $smoke
 
-<<<<<<< Updated upstream
-@export var strafeSpeed = 1 # walk state speed
-@export var rollSpeed = 12 # roll state speed
-@export var minXRollDistance = 10
-@export var minYRollDistance = 10 # if player is within these x and y distances, it will charge
-=======
+
 var tileScale = 128
 @export var strafeSpeed = 3 # walk state speed in tiles per second
 @export var rollSpeed = 6 # roll state speed in tiles per second
 @export var minXRollDistance = 10
 @export var minYRollDistance = 2 # if player is within x and y tiles, it will charge
->>>>>>> Stashed changes
 @export var pullInTime = 1 # time (s) it spends pulling in before roll
 @export var direction = 1 # set starting direction, -1 for left, 1 for right
 var timer
 var state = "walk"
 
-<<<<<<< Updated upstream
 
 var tile_scale : int = 128
 
@@ -45,13 +39,7 @@ func _ready() -> void:
 	for i in children : 
 		if i.has_method("player") : 
 			player = i
-=======
-func _ready() -> void:
-	strafeSpeed *= tileScale
-	rollSpeed *= tileScale
-	minXRollDistance *= tileScale
-	minYRollDistance *= tileScale
->>>>>>> Stashed changes
+
 
 func _physics_process(delta: float) -> void:
 	if health <= 0:
@@ -75,10 +63,10 @@ func walk(delta: float) -> void:
 	
 	if direction == -1 and (ray_cast_l.is_colliding() or !ray_cast_dl.is_colliding()):
 		direction = 1
-		advanced_rock_walk.flip_h = true
+		sprite.flip_h = true
 	elif direction == 1 and (ray_cast_r.is_colliding() or !ray_cast_dr.is_colliding()):
 		direction = -1
-		advanced_rock_walk.flip_h = false
+		sprite.flip_h = false
 	
 	ray_cast_at_player.target_position = player.global_position - global_position
 	
@@ -86,10 +74,10 @@ func walk(delta: float) -> void:
 		state = "pullIn"
 		if player.global_position.x < global_position.x:
 			direction = -1
-			advanced_rock_walk.flip_h = false
+			sprite.flip_h = false
 		else:
 			direction = 1
-			advanced_rock_walk.flip_h = true
+			sprite.flip_h = true
 		timer = pullInTime
 
 func pullIn(delta: float) -> void:

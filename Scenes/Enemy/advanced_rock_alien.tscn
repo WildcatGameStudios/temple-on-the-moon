@@ -1,46 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://gexjkq53t07f"]
+[gd_scene load_steps=6 format=3 uid="uid://gexjkq53t07f"]
 
 [ext_resource type="PackedScene" uid="uid://cvm1ewio2b6uf" path="res://Scenes/Enemy/enemy.tscn" id="1_x4mna"]
 [ext_resource type="Script" uid="uid://kihmotjphao4" path="res://Scripts/Enemy/advanced_rock_alien.gd" id="2_pf0ph"]
-[ext_resource type="Texture2D" uid="uid://ccyjqjmvgbodu" path="res://Art/Sprites/Advanced_Rock/Advanced_Rock_Walk.png" id="3_4sucn"]
+[ext_resource type="SpriteFrames" uid="uid://cisjmcmukce3y" path="res://Resources/Spriteframes/advanced_rock.tres" id="3_4sucn"]
+[ext_resource type="SpriteFrames" uid="uid://bykda5u72kys0" path="res://Resources/Spriteframes/smoke.tres" id="4_4vd3h"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4vd3h"]
 
 [node name="advanced_rock_alien" instance=ExtResource("1_x4mna")]
 script = ExtResource("2_pf0ph")
-<<<<<<< Updated upstream
-strafeSpeed = 1
-rollSpeed = 20
-minXRollDistance = 10
-minYRollDistance = 10
-=======
 strafeSpeed = 3
 rollSpeed = 6
 minXRollDistance = 10
 minYRollDistance = 2
->>>>>>> Stashed changes
 pullInTime = 1
 direction = 1
 
-[node name="sprite" type="AnimatedSprite2D" parent="." index="0"]
-animation = &""
-
 [node name="rayCastL" type="RayCast2D" parent="raycast" index="0"]
-<<<<<<< Updated upstream
 target_position = Vector2(-120, 0)
 
-[node name="rayCastR" type="RayCast2D" parent="raycast" index="1"]
-target_position = Vector2(120, 0)
-=======
-target_position = Vector2(-69, 0)
-collision_mask = 3
-collide_with_areas = true
-
-[node name="rayCastR" type="RayCast2D" parent="raycast" index="1"]
+[node name="rayCastR2" type="RayCast2D" parent="raycast" index="1"]
 target_position = Vector2(69, 0)
 collision_mask = 3
 collide_with_areas = true
->>>>>>> Stashed changes
 
 [node name="rayCastDL" type="RayCast2D" parent="raycast" index="2"]
 target_position = Vector2(-63.7046, 70.7864)
@@ -52,18 +34,20 @@ target_position = Vector2(64.5908, 70.5727)
 position = Vector2(0, -0.178833)
 collision_mask = 3
 
-<<<<<<< Updated upstream
-[node name="ColorRect" type="ColorRect" parent="." index="6"]
-offset_left = -63.0
-offset_top = -64.0
-offset_right = -23.0
-offset_bottom = -24.0
-scale = Vector2(3.2, 3.2)
-=======
-[node name="animation" parent="." index="5"]
+[node name="rayCastR" type="RayCast2D" parent="raycast" index="5"]
+target_position = Vector2(120, 0)
+
+[node name="animation" parent="." index="4"]
 sprite_frames = SubResource("SpriteFrames_4vd3h")
 
-[node name="AdvancedRockWalk" type="Sprite2D" parent="." index="7"]
-position = Vector2(0, -16)
-texture = ExtResource("3_4sucn")
->>>>>>> Stashed changes
+[node name="sprite" type="AnimatedSprite2D" parent="." index="6"]
+sprite_frames = ExtResource("3_4sucn")
+animation = &"move"
+autoplay = "move"
+frame_progress = 0.544608
+
+[node name="smoke" type="AnimatedSprite2D" parent="." index="7"]
+position = Vector2(10, 9)
+sprite_frames = ExtResource("4_4vd3h")
+animation = &"smoke"
+frame_progress = 0.0278864

@@ -181,7 +181,6 @@ scale = Vector2(-84.8714, -6.56133)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="floor_check"]
 position = Vector2(-0.247406, 0)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_a5w8t")
 
 [node name="KILLZONE" type="Area2D" parent="."]

@@ -2,11 +2,7 @@
 
 [ext_resource type="SpriteFrames" uid="uid://dtqm2ruysk0tk" path="res://Resources/Spriteframes/player.tres" id="1_eks58"]
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_ymc8e"]
-<<<<<<< Updated upstream
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine.gd" id="3_ao45h"]
-=======
-[ext_resource type="Script" uid="uid://c0mbhkgeilqa6" path="res://Scripts/Player/PlayerStateMachine.gd" id="3_ao45h"]
->>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://btp2myjggfb0" path="res://Scenes/General/hitbox.tscn" id="4_u6vjy"]
 [ext_resource type="SpriteFrames" uid="uid://djau6tjdxiorl" path="res://Resources/Spriteframes/staff_swing.tres" id="5_htcer"]
 [ext_resource type="PackedScene" uid="uid://dxw3oselkunhj" path="res://Scenes/General/hurtbox.tscn" id="6_dd0ac"]

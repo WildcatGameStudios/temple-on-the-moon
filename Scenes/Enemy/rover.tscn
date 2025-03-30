@@ -2,16 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://cvm1ewio2b6uf" path="res://Scenes/Enemy/enemy.tscn" id="1_cfmwh"]
 [ext_resource type="SpriteFrames" uid="uid://bvfgvywg0s7ve" path="res://Resources/Spriteframes/rover_base.tres" id="2_g2fjl"]
-<<<<<<< Updated upstream
 [ext_resource type="Script" path="res://Scripts/Enemy/rover.gd" id="2_ijpbi"]
 [ext_resource type="Script" path="res://Scripts/Enemy/rover_state_machine.gd" id="4_iro2x"]
 [ext_resource type="Script" uid="uid://cdo2j6y61n02u" path="res://Scripts/General/hurtbox.gd" id="4_l33ua"]
 [ext_resource type="PackedScene" uid="uid://c04tvjc2rn5gg" path="res://Scenes/General/oil_activator.tscn" id="6_ugnci"]
-=======
-[ext_resource type="Script" uid="uid://ct7s0o5uqvykd" path="res://Scripts/Enemy/rover.gd" id="2_ijpbi"]
-[ext_resource type="Script" uid="uid://d1d82oxtyr4iv" path="res://Scripts/Enemy/rover_state_machine.gd" id="4_iro2x"]
-[ext_resource type="Script" uid="uid://dn0cnsw6wp5w1" path="res://Scripts/General/hurtbox.gd" id="4_l33ua"]
->>>>>>> Stashed changes
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qm3ma"]
 
