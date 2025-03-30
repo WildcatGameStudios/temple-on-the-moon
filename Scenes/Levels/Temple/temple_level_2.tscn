@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://bevpi6yocmr8b"]
 
 [ext_resource type="PackedScene" uid="uid://ch0ngvub8x32f" path="res://Scenes/Player/player.tscn" id="1_or16a"]
-[ext_resource type="Script" uid="uid://dn0cnsw6wp5w1" path="res://Scripts/General/hurtbox.gd" id="2_hilu7"]
+[ext_resource type="Script" path="res://Scripts/General/hurtbox.gd" id="2_hilu7"]
 [ext_resource type="TileSet" uid="uid://bgs6qd1bp27v5" path="res://Resources/Tilesets/test_set.tres" id="4_hilu7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_caamt"]

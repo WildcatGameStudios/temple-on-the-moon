@@ -42,12 +42,15 @@ sprite_frames = SubResource("SpriteFrames_4vd3h")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." index="6"]
 sprite_frames = ExtResource("3_4sucn")
-animation = &"move"
+animation = &"die"
 autoplay = "move"
-frame_progress = 0.544608
+frame = 27
+frame_progress = 1.0
 
 [node name="smoke" type="AnimatedSprite2D" parent="." index="7"]
+visible = false
 position = Vector2(10, 9)
 sprite_frames = ExtResource("4_4vd3h")
 animation = &"smoke"
-frame_progress = 0.0278864
+autoplay = "smoke"
+frame_progress = 0.936823

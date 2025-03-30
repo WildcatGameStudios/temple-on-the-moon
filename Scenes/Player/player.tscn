@@ -14,7 +14,7 @@ height = 228.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ypdb4"]
 radius = 29.0
-height = 188.0
+height = 262.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u5uq"]
 size = Vector2(513.5, 232)
@@ -67,7 +67,7 @@ collision_mask = 1
 blacklist_type = Array[int]([0])
 
 [node name="hitbox_collider" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(0, 22)
+position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_ypdb4")
 
 [node name="weapon" type="AnimatedSprite2D" parent="."]

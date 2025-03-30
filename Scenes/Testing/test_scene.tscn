@@ -52,6 +52,7 @@ tile_set = ExtResource("5_l0kvj")
 position = Vector2(2203, 66)
 
 [node name="advanced_rock_alien" parent="." instance=ExtResource("8_7k7ss")]
+position = Vector2(1520, 63)
 
 [node name="oil" parent="." instance=ExtResource("8_fvnad")]
 position = Vector2(1996, 119)
