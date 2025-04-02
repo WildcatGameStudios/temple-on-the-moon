@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://gexjkq53t07f"]
+[gd_scene load_steps=7 format=3 uid="uid://gexjkq53t07f"]
 
 [ext_resource type="PackedScene" uid="uid://cvm1ewio2b6uf" path="res://Scenes/Enemy/enemy.tscn" id="1_x4mna"]
 [ext_resource type="Script" uid="uid://kihmotjphao4" path="res://Scripts/Enemy/advanced_rock_alien.gd" id="2_pf0ph"]
 [ext_resource type="SpriteFrames" uid="uid://cisjmcmukce3y" path="res://Resources/Spriteframes/advanced_rock.tres" id="3_4sucn"]
 [ext_resource type="SpriteFrames" uid="uid://bykda5u72kys0" path="res://Resources/Spriteframes/smoke.tres" id="4_4vd3h"]
+[ext_resource type="Script" uid="uid://cwkdhim5xq8pb" path="res://Scripts/Enemy/advanced_rock_state_machine.gd" id="5_tu48m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4vd3h"]
 
@@ -12,8 +13,7 @@ script = ExtResource("2_pf0ph")
 strafeSpeed = 3
 rollSpeed = 6
 minXRollDistance = 10
-minYRollDistance = 2
-pullInTime = 1
+minYRollDistance = 1
 direction = 1
 
 [node name="rayCastL" type="RayCast2D" parent="raycast" index="0"]
@@ -41,16 +41,19 @@ target_position = Vector2(120, 0)
 sprite_frames = SubResource("SpriteFrames_4vd3h")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." index="6"]
+position = Vector2(-1, -1)
 sprite_frames = ExtResource("3_4sucn")
 animation = &"die"
 autoplay = "move"
-frame = 27
-frame_progress = 1.0
 
 [node name="smoke" type="AnimatedSprite2D" parent="." index="7"]
-visible = false
-position = Vector2(10, 9)
+position = Vector2(0, 9)
 sprite_frames = ExtResource("4_4vd3h")
 animation = &"smoke"
 autoplay = "smoke"
 frame_progress = 0.936823
+
+[node name="advanced_rock_state_machine" type="Node" parent="." index="8"]
+script = ExtResource("5_tu48m")
+
+[connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]

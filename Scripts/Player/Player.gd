@@ -385,3 +385,8 @@ func aim(delta: float) -> void:
 func clear_aim_line() -> void:
 	aim_line.clear_points()
 	remove_child(aim_line)
+
+
+func _on_sprite_animation_finished() -> void:
+	if !$hitbox.monitoring:
+		get_tree().change_scene_to_file("res://Scenes/Levels/Menu.tscn")

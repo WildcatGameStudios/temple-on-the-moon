@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c38q64mfjpr3f"]
+
+[ext_resource type="Texture2D" uid="uid://br32sok3dy6uy" path="res://Art/Backgrounds/Light.png" id="1_nqt1r"]
+
+[node name="PointLight2D" type="PointLight2D"]
+scale = Vector2(1.11784, 1.11784)
+texture = ExtResource("1_nqt1r")

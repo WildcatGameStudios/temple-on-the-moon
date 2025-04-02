@@ -9,17 +9,13 @@ extends Enemy
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var smoke: AnimatedSprite2D = $smoke
 
-
-var tileScale = 128
 @export var strafeSpeed = 3 # walk state speed in tiles per second
 @export var rollSpeed = 6 # roll state speed in tiles per second
 @export var minXRollDistance = 10
-@export var minYRollDistance = 2 # if player is within x and y tiles, it will charge
-@export var pullInTime = 1 # time (s) it spends pulling in before roll
+@export var minYRollDistance = 1 # if player is within x and y tiles, it will charge
 @export var direction = 1 # set starting direction, -1 for left, 1 for right
 var timer
 var state = "walk"
-
 
 var tile_scale : int = 128
 
@@ -42,21 +38,14 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if health <= 0:
-		queue_free()
-	
 	if !is_on_floor():
-		velocity.y += ENEMY_GRAVITY * 1.25 * tileScale * delta
+		velocity.y += ENEMY_GRAVITY * 1.25 * tile_scale * delta
 	else:
 		velocity.y = 0
-	
-	if state == "walk":
-		walk(delta)
-	elif state == "pullIn":
-		pullIn(delta)
-	elif state == "roll":
-		roll(delta)
 	move_and_slide()
+
+func init_walk() -> void:
+	$smoke.show() # using $smoke because smoke causes error
 
 func walk(delta: float) -> void:
 	position.x += strafeSpeed * direction * delta
@@ -69,23 +58,55 @@ func walk(delta: float) -> void:
 		sprite.flip_h = false
 	
 	ray_cast_at_player.target_position = player.global_position - global_position
-	
-	if ray_cast_at_player.get_collider() == player and player.is_on_floor() and abs(player.global_position.x - global_position.x) < minXRollDistance and abs(player.global_position.y - global_position.y) < minYRollDistance:
-		state = "pullIn"
-		if player.global_position.x < global_position.x:
-			direction = -1
-			sprite.flip_h = false
-		else:
-			direction = 1
-			sprite.flip_h = true
-		timer = pullInTime
+	ray_cast_at_player.force_raycast_update()
 
-func pullIn(delta: float) -> void:
+func walk_to_curl() -> bool:
+	return ray_cast_at_player.get_collider() == player and player.is_on_floor() and abs(player.global_position.x - global_position.x) < minXRollDistance and abs(player.global_position.y - global_position.y) < minYRollDistance
+
+func init_curl() -> void:
+	smoke.hide()
+	if player.global_position.x < global_position.x:
+		direction = -1
+		sprite.flip_h = false
+	else:
+		direction = 1
+		sprite.flip_h = true
+	timer = 1
+	sprite.play("curl")
+
+func curl(delta : float) -> void:
 	timer -= delta
-	if timer <= 0:
-		state = "roll"
+
+func curl_to_roll() -> bool:
+	return timer <= 0
+
+func init_roll() -> void:
+	sprite.play("roll")
 
 func roll(delta: float) -> void:
 	position.x += rollSpeed * direction * delta
-	if (direction == -1 and (ray_cast_l.is_colliding() or !ray_cast_dl.is_colliding())) or (direction == 1 and (ray_cast_r.is_colliding() or !ray_cast_dr.is_colliding())):
-		state = "walk"
+
+func roll_to_uncurl() -> bool:
+	return (direction == -1 and (ray_cast_l.is_colliding() or !ray_cast_dl.is_colliding())) or (direction == 1 and (ray_cast_r.is_colliding() or !ray_cast_dr.is_colliding()))
+
+func init_uncurl() -> void:
+	timer = 1
+	sprite.play("uncurl")
+
+func uncurl(delta : float) -> void:
+	timer -= delta
+
+func uncurl_to_walk() -> bool:
+	return timer <= 0
+
+func _on_hitbox_hit(origin: Vector2, damage: int, knockback: float) -> void:
+	health -= damage
+	
+func init_die() -> void:
+	sprite.play("die")
+	timer = 1
+
+func dying(delta : float) -> void:
+	timer -= delta
+	if timer <= 0:
+		queue_free()
