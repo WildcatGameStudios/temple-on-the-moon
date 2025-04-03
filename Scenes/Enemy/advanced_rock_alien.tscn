@@ -11,7 +11,7 @@
 [node name="advanced_rock_alien" instance=ExtResource("1_x4mna")]
 script = ExtResource("2_pf0ph")
 strafeSpeed = 3
-rollSpeed = 6
+rollSpeed = 10
 minXRollDistance = 10
 minYRollDistance = 1
 direction = 1
@@ -43,15 +43,16 @@ sprite_frames = SubResource("SpriteFrames_4vd3h")
 [node name="sprite" type="AnimatedSprite2D" parent="." index="6"]
 position = Vector2(-1, -1)
 sprite_frames = ExtResource("3_4sucn")
-animation = &"die"
+animation = &"move"
 autoplay = "move"
 
 [node name="smoke" type="AnimatedSprite2D" parent="." index="7"]
-position = Vector2(0, 9)
+position = Vector2(0, -17)
+scale = Vector2(1.5, 1.5)
 sprite_frames = ExtResource("4_4vd3h")
 animation = &"smoke"
 autoplay = "smoke"
-frame_progress = 0.936823
+frame_progress = 0.604717
 
 [node name="advanced_rock_state_machine" type="Node" parent="." index="8"]
 script = ExtResource("5_tu48m")
