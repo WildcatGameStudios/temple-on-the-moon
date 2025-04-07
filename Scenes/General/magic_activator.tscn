@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c1onp6n3etbo0"]
 
-[ext_resource type="Script" uid="uid://cct5ngef8isbr" path="res://Scripts/General/magic_activator.gd" id="1_mplyp"]
+[ext_resource type="Script" path="res://Scripts/General/magic_activator.gd" id="1_mplyp"]
 
 [node name="magic_activator" type="Node2D"]
 script = ExtResource("1_mplyp")

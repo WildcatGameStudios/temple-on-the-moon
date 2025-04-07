@@ -44,5 +44,15 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	var n = body.find_child("magic_activator")
 	if n == null: return
 	if n.is_in_group("magic_activated"):
+		print("Magic activator found")
+		exploding = true
+		n.emit_signal("triggered")
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	var n = area.find_child("magic_activator")
+	if n == null: return
+	if n.is_in_group("magic_activated"):
+		print("Magic activator found")
 		exploding = true
 		n.emit_signal("triggered")
