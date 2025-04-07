@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://dax7vyo375ra0"]
+
+[ext_resource type="Script" uid="uid://dkgp2nq1d6b0s" path="res://Scripts/General/menu.gd" id="1_oaiwo"]
+[ext_resource type="FontFile" uid="uid://8e5e2n58jrlg" path="res://Art/UI/Fonts/PixelOperator8-Bold.ttf" id="2_1xeoe"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aegwq"]
+font_size = 35
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_oaiwo")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 394.0
+offset_top = 55.0
+offset_right = 782.0
+offset_bottom = 112.0
+theme_override_fonts/font = ExtResource("2_1xeoe")
+text = "World Select"
+label_settings = SubResource("LabelSettings_aegwq")
+horizontal_alignment = 1
+
+[node name="test_level_button" type="Button" parent="."]
+offset_left = 65.0
+offset_top = 540.0
+offset_right = 329.0
+offset_bottom = 614.0
+theme_override_fonts/font = ExtResource("2_1xeoe")
+theme_override_font_sizes/font_size = 28
+text = "Test Level"
+
+[node name="moon_button" type="Button" parent="."]
+offset_left = 449.0
+offset_top = 151.0
+offset_right = 713.0
+offset_bottom = 226.0
+theme_override_fonts/font = ExtResource("2_1xeoe")
+theme_override_font_sizes/font_size = 28
+text = "Moon"
+
+[node name="junkyard_button" type="Button" parent="."]
+offset_left = 448.0
+offset_top = 275.0
+offset_right = 712.0
+offset_bottom = 349.0
+theme_override_fonts/font = ExtResource("2_1xeoe")
+theme_override_font_sizes/font_size = 28
+text = "Junkyard
+"
+
+[node name="temple_button" type="Button" parent="."]
+offset_left = 448.0
+offset_top = 398.0
+offset_right = 715.0
+offset_bottom = 472.0
+theme_override_fonts/font = ExtResource("2_1xeoe")
+theme_override_font_sizes/font_size = 28
+text = "Temple"
+
+[connection signal="pressed" from="test_level_button" to="." method="_on_test_level_button_pressed"]
+[connection signal="pressed" from="moon_button" to="." method="_on_moon_button_pressed"]
+[connection signal="pressed" from="junkyard_button" to="." method="_on_junkyard_button_pressed"]
+[connection signal="pressed" from="temple_button" to="." method="_on_temple_button_pressed"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=4 uid="uid://bi5i6fd1xyqok"]
+
+[ext_resource type="TileSet" uid="uid://bgs6qd1bp27v5" path="res://Resources/Tilesets/test_set.tres" id="1_ha1mo"]
+[ext_resource type="PackedScene" uid="uid://t0reb3ks4f51" path="res://Scenes/Objects/platform_activator.tscn" id="2_4np1j"]
+[ext_resource type="PackedScene" uid="uid://0wvil6x7ervf" path="res://Scenes/Objects/dissapearing_platform.tscn" id="2_6n6mg"]
+[ext_resource type="PackedScene" uid="uid://ch0ngvub8x32f" path="res://Scenes/Player/player.tscn" id="3_6n6mg"]
+
+[node name="level_2" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAALAAAAAAD//wAAAAAKAAAAAAD+/wAAAAAJAAAAAAD9/wEAAAAJAAAAAAD9/wIAAAAJAAEAAAD9/wMAAAAJAAIAAAD+/wQAAAAJAAIAAAD//wUAAAAJAAIAAAAAAAUAAAAKAAIAAAABAAUAAAAKAAIAAAACAAUAAAAKAAIAAAADAAQAAAAKAAEAAAAEAAQAAAAIAAMAAAAEAAMAAAALAAEAAAAEAAIAAAALAAAAAAADAAIAAAAKAAAAAAACAAIAAAAKAAAAAAABAAIAAAAKAAAAAAABAAMAAAAKAAEAAAABAAQAAAAKAAEAAAAAAAMAAAAKAAEAAAD//wMAAAAKAAEAAAD+/wMAAAALAAMAAAD+/wIAAAAKAAEAAAD+/wEAAAAJAAMAAAD//wEAAAAKAAEAAAAAAAEAAAALAAEAAAAAAAIAAAAIAAMAAAD//wIAAAAKAAEAAAD//wQAAAALAAMAAAACAAQAAAAKAAEAAAADAAMAAAAKAAEAAAAAAAQAAAAKAAEAAAACAAMAAAAKAAEAAAADAAUAAAAKAAIAAAAEAAUAAAAKAAIAAAAFAAUAAAAKAAIAAAAGAAUAAAAKAAIAAAAHAAUAAAAKAAIAAAAIAAUAAAAKAAIAAAAJAAUAAAAKAAIAAAAKAAUAAAAKAAIAAAALAAUAAAAKAAIAAAAMAAUAAAAKAAIAAAANAAUAAAAKAAIAAAAOAAUAAAAKAAIAAAAPAAUAAAAKAAIAAAAGAAQAAAAKAAAAAAAFAAQAAAAKAAAAAAAHAAQAAAAKAAAAAAAIAAQAAAAKAAAAAAAJAAQAAAAKAAAAAAAKAAQAAAAKAAAAAAALAAQAAAAKAAAAAAAQAAUAAAAKAAIAAAARAAUAAAAKAAIAAAARAAQAAAAKAAAAAAAQAAQAAAAKAAAAAAAPAAQAAAAKAAAAAAAOAAQAAAAKAAAAAAANAAQAAAAKAAAAAAAMAAQAAAAKAAAAAAAkAAQAAAAJAAAAAAAkAAUAAAAJAAIAAAArAAUAAAALAAIAAAArAAQAAAALAAAAAAAqAAQAAAAKAAAAAAApAAQAAAAKAAAAAAAoAAQAAAAKAAAAAAAnAAQAAAAKAAAAAAAmAAQAAAAKAAAAAAAlAAQAAAAKAAAAAAAlAAUAAAAKAAIAAAAmAAUAAAAKAAIAAAAnAAUAAAAKAAIAAAAoAAUAAAAKAAIAAAApAAUAAAAKAAIAAAAqAAUAAAAKAAIAAAASAAQAAAAKAAAAAAATAAQAAAALAAAAAAATAAUAAAALAAIAAAASAAUAAAAKAAIAAAA=")
+tile_set = ExtResource("1_ha1mo")
+
+[node name="platforms" type="Node2D" parent="."]
+
+[node name="dissapearing_platform" parent="platforms" instance=ExtResource("2_6n6mg")]
+position = Vector2(3105, 530)
+
+[node name="dissapearing_platform2" parent="platforms" instance=ExtResource("2_6n6mg")]
+position = Vector2(5915, 533)
+
+[node name="dissapearing_platform3" parent="platforms" instance=ExtResource("2_6n6mg")]
+position = Vector2(6750, 536)
+
+[node name="activators" type="Node2D" parent="."]
+
+[node name="platform_activator" parent="activators" node_paths=PackedStringArray("platforms") instance=ExtResource("2_4np1j")]
+position = Vector2(2088, 353)
+platforms = [NodePath("../../platforms/dissapearing_platform")]
+switch_time = 2.0
+active_group = 2
+
+[node name="platform_activator2" parent="activators" node_paths=PackedStringArray("platforms", "group_1", "group_2") instance=ExtResource("2_4np1j")]
+position = Vector2(5387, 353)
+platforms = [NodePath("../../platforms/dissapearing_platform")]
+type = "Toggle"
+group_1 = [NodePath("../../platforms/dissapearing_platform2")]
+group_2 = [NodePath("../../platforms/dissapearing_platform3")]
+toggle_time = 2.0
+
+[node name="player" parent="." instance=ExtResource("3_6n6mg")]
+position = Vector2(1383, 390)

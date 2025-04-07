@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://t0reb3ks4f51"]
+
+[ext_resource type="PackedScene" uid="uid://c1onp6n3etbo0" path="res://Scenes/General/magic_activator.tscn" id="1_f6xub"]
+[ext_resource type="Script" uid="uid://dcbju8om22itw" path="res://Scripts/Objects/platform_activator.gd" id="1_r7ovy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f6xub"]
+radius = 105.304
+
+[node name="platform_activator" type="Sprite2D"]
+script = ExtResource("1_r7ovy")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(64, 63)
+shape = SubResource("CircleShape2D_f6xub")
+
+[node name="magic_activator" parent="Area2D" instance=ExtResource("1_f6xub")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="timers" type="Node" parent="."]
+
+[node name="switch_timer" type="Timer" parent="timers"]
+one_shot = true
+
+[node name="toggle_timer" type="Timer" parent="timers"]
+one_shot = true
+
+[node name="cascade_timer" type="Timer" parent="timers"]
+
+[node name="cooldown_timer" type="Timer" parent="timers"]
+
+[connection signal="triggered" from="Area2D/magic_activator" to="." method="_on_magic_activator_triggered"]
+[connection signal="timeout" from="timers/switch_timer" to="." method="_on_switch_timer_timeout"]
+[connection signal="timeout" from="timers/toggle_timer" to="." method="_on_toggle_timer_timeout"]
+[connection signal="timeout" from="timers/cooldown_timer" to="." method="_on_cooldown_timer_timeout"]
