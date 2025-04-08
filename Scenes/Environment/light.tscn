@@ -3,5 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://br32sok3dy6uy" path="res://Art/Backgrounds/Light.png" id="1_nqt1r"]
 
 [node name="PointLight2D" type="PointLight2D"]
-scale = Vector2(1.11784, 1.11784)
+scale = Vector2(0.751098, 0.751098)
 texture = ExtResource("1_nqt1r")
