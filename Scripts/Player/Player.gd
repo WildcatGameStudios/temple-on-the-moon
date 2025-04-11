@@ -389,4 +389,4 @@ func clear_aim_line() -> void:
 
 func _on_sprite_animation_finished() -> void:
 	if !$hitbox.monitoring:
-		get_tree().change_scene_to_file("res://Scenes/Levels/Menu.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Levels/menu_screens/Menu.tscn")

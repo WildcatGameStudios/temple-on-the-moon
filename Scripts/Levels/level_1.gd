@@ -6,8 +6,6 @@ extends Node2D
 @onready var fragment: Sprite2D = $fragments/fragment 
 @onready var player_ui: Control = $player/player_ui
 
-
-
 # Level variables 
 var fragments_collected : int = 0 : 
 	set (new_value) : 

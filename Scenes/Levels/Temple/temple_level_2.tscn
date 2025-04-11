@@ -1,18 +1,19 @@
-[gd_scene load_steps=10 format=4 uid="uid://bevpi6yocmr8b"]
+[gd_scene load_steps=13 format=4 uid="uid://bevpi6yocmr8b"]
 
-[ext_resource type="Script" uid="uid://cyn5ii1txfi35" path="res://Scenes/Levels/Temple/temple_level_2.gd" id="1_4cov5"]
+[ext_resource type="Script" uid="uid://cyn5ii1txfi35" path="res://Scripts/Levels/temple_level_2.gd" id="1_4cov5"]
 [ext_resource type="PackedScene" uid="uid://ch0ngvub8x32f" path="res://Scenes/Player/player.tscn" id="1_or16a"]
 [ext_resource type="PackedScene" uid="uid://c38q64mfjpr3f" path="res://Scenes/Environment/light.tscn" id="2_caamt"]
 [ext_resource type="Script" uid="uid://dn0cnsw6wp5w1" path="res://Scripts/General/hurtbox.gd" id="2_hilu7"]
 [ext_resource type="PackedScene" uid="uid://dcgbwrg4wm7jw" path="res://Scenes/Enemy/basic_alien.tscn" id="4_caamt"]
 [ext_resource type="TileSet" uid="uid://bgs6qd1bp27v5" path="res://Resources/Tilesets/test_set.tres" id="4_hilu7"]
 [ext_resource type="TileSet" uid="uid://fd2c2ax15lyu" path="res://Resources/Tilesets/moon_rocks.tres" id="5_at2i5"]
+[ext_resource type="Script" uid="uid://b2hpfrf3u3a2x" path="res://Scripts/Levels/temple_2_collectibles.gd" id="8_6v1qk"]
+[ext_resource type="PackedScene" uid="uid://btvgdutwlbor5" path="res://Scenes/Objects/basic_collectable.tscn" id="8_11ysg"]
+[ext_resource type="PackedScene" uid="uid://clsrryoby3epg" path="res://Scenes/Objects/fragment_key.tscn" id="9_plg7i"]
+[ext_resource type="PackedScene" uid="uid://b8ehnhi0st1wu" path="res://Scenes/Objects/fragment.tscn" id="10_plg7i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_caamt"]
-size = Vector2(7006, 1345)
-
-[sub_resource type="Environment" id="Environment_blr1e"]
-background_mode = 1
+size = Vector2(9569, 1345)
 
 [node name="TempleLevel2" type="Node2D"]
 script = ExtResource("1_4cov5")
@@ -35,11 +36,11 @@ script = ExtResource("2_hilu7")
 hurt_damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killbox"]
-position = Vector2(1728, 1562)
+position = Vector2(3009.5, 1562)
 shape = SubResource("RectangleShape2D_caamt")
 
 [node name="TileMapLayerMain" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAABAAEAAAAJAAAAAAACAAEAAAAKAAAAAAADAAEAAAAJAAMAAAAEAAEAAAAIAAMAAAAFAAEAAAAKAAAAAAAGAAEAAAAKAAAAAAABAAIAAAAJAAIAAAACAAIAAAAKAAIAAAADAAIAAAAKAAIAAAAEAAIAAAAKAAIAAAAFAAIAAAAKAAIAAAAGAAIAAAAKAAIAAAAHAAEAAAAKAAAAAAAHAAIAAAAKAAIAAAAIAAIAAAAKAAIAAAAIAAEAAAAKAAAAAAAJAAEAAAAKAAAAAAAJAAIAAAAKAAIAAAAKAAIAAAAKAAIAAAAKAAEAAAAKAAAAAAALAAEAAAAKAAAAAAAMAAEAAAAKAAAAAAANAAEAAAAEAAAAAAAOAAEAAAAKAAAAAAAPAAEAAAAKAAAAAAAPAAIAAAAKAAIAAAAOAAIAAAAKAAIAAAANAAIAAAAKAAIAAAAMAAIAAAAKAAIAAAALAAIAAAAKAAIAAAANAAAAAAAAAAAAAAAQAAEAAAAKAAAAAAARAAEAAAAKAAAAAAASAAEAAAAKAAAAAAATAAEAAAAKAAAAAAAUAAEAAAAKAAAAAAAVAAEAAAAKAAAAAAAWAAEAAAAEAAAAAAAWAAIAAAAKAAIAAAAVAAIAAAAKAAIAAAAUAAIAAAAKAAIAAAATAAIAAAAKAAIAAAASAAIAAAAKAAIAAAARAAIAAAAKAAIAAAAQAAIAAAAKAAIAAAAWAAAAAAAAAAEAAAAXAAEAAAAKAAAAAAAYAAEAAAAKAAAAAAAZAAEAAAAKAAAAAAAaAAEAAAAKAAAAAAAbAAEAAAAKAAAAAAAcAAEAAAAKAAAAAAAcAAIAAAAKAAIAAAAbAAIAAAAKAAIAAAAaAAIAAAAKAAIAAAAZAAIAAAAKAAIAAAAYAAIAAAAKAAIAAAAXAAIAAAAKAAIAAAAdAAEAAAAKAAAAAAAeAAEAAAAKAAAAAAAeAAIAAAAKAAIAAAAfAAIAAAAKAAIAAAAgAAIAAAAKAAIAAAAhAAIAAAAKAAIAAAAiAAEAAAAKAAAAAAAjAAEAAAAKAAAAAAAkAAEAAAAJAAMAAAAhAAEAAAAKAAAAAAAgAAEAAAAKAAAAAAAfAAEAAAAKAAAAAAAdAAIAAAAKAAIAAAAiAAIAAAAKAAIAAAAjAAIAAAAKAAIAAAAkAAIAAAAKAAIAAAAkAAAAAAAJAAEAAAAkAP//AAAJAAEAAAAkAPz/AAAJAAAAAAAkAP3/AAAJAAEAAAAkAP7/AAAJAAEAAAAlAPz/AAAKAAAAAAAmAPz/AAAKAAAAAAAnAPz/AAAKAAAAAAAoAPz/AAAKAAAAAAApAPz/AAAKAAAAAAApAAIAAAAKAAIAAAAoAAIAAAAKAAIAAAAnAAIAAAAKAAIAAAAmAAIAAAAKAAIAAAAlAAIAAAAKAAIAAAAlAAEAAAAKAAEAAAAlAP7/AAAKAAEAAAAlAP3/AAAKAAEAAAAmAP3/AAAKAAEAAAAnAP3/AAAKAAEAAAAoAP3/AAAKAAEAAAAnAAAAAAAKAAEAAAAmAP//AAAKAAEAAAAnAP//AAAKAAEAAAAEAPz/AAAJAAIAAAAFAPz/AAAKAAIAAAAGAPz/AAAKAAIAAAAHAPz/AAAKAAIAAAAIAPz/AAALAAIAAAAEAPv/AAADAAAAAAAFAPv/AAAKAAAAAAAGAPv/AAAKAAAAAAAHAPv/AAAKAAAAAAAIAPv/AAALAAAAAAAEAPr/AAAAAAEAAAAEAPn/AAAAAAEAAAAEAPj/AAAAAAEAAAAEAPf/AAAAAAEAAAAEAPb/AAAAAAAAAAADAAAAAAAJAAAAAAAEAAAAAAALAAAAAAAWAP//AAAAAAAAAAAoAP//AAAKAAEAAAAoAAAAAAAKAAEAAAApAAAAAAAKAAEAAAApAAEAAAAKAAEAAAAqAAEAAAAKAAEAAAAqAAAAAAAKAAEAAAAqAP//AAAKAAEAAAAqAP7/AAAKAAEAAAApAP7/AAAKAAEAAAAoAP7/AAAKAAEAAAAnAP7/AAAKAAEAAAAlAP//AAAKAAEAAAAlAAAAAAAKAAEAAAAmAAAAAAAKAAEAAAAmAAEAAAAKAAEAAAAnAAEAAAAKAAEAAAAoAAEAAAAKAAEAAAArAAEAAAAKAAEAAAAsAAEAAAALAAEAAAArAPz/AAAKAAAAAAAqAPz/AAAKAAAAAAAqAP3/AAAKAAEAAAApAP//AAAKAAEAAAAsAAIAAAALAAIAAAAsAP3/AAALAAEAAAArAP3/AAAKAAEAAAApAP3/AAAKAAEAAAAsAP7/AAALAAEAAAArAP7/AAAKAAEAAAAsAAAAAAALAAEAAAArAP//AAAKAAEAAAAsAPz/AAALAAAAAAAsAP//AAALAAEAAAArAAAAAAAKAAEAAAArAAIAAAAKAAIAAAAqAAIAAAAKAAIAAAAmAP7/AAAKAAEAAAA=")
+tile_map_data = PackedByteArray("AAABAAIAAAAJAAIAAAACAAIAAAAKAAIAAAADAAIAAAAKAAIAAAAEAAIAAAAKAAIAAAAFAAIAAAAKAAIAAAAGAAIAAAAKAAIAAAAHAAIAAAAKAAIAAAAIAAIAAAAKAAIAAAAJAAIAAAAKAAIAAAAKAAIAAAAKAAIAAAAPAAIAAAAKAAIAAAAOAAIAAAAKAAIAAAANAAIAAAAKAAIAAAAMAAIAAAAKAAIAAAALAAIAAAAKAAIAAAAWAAIAAAAKAAIAAAAVAAIAAAAKAAIAAAAUAAIAAAAKAAIAAAATAAIAAAAKAAIAAAASAAIAAAAKAAIAAAARAAIAAAAKAAIAAAAQAAIAAAAKAAIAAAAcAAIAAAAKAAIAAAAbAAIAAAAKAAIAAAAaAAIAAAAKAAIAAAAZAAIAAAAKAAIAAAAYAAIAAAAKAAIAAAAXAAIAAAAKAAIAAAAeAAIAAAALAAIAAAAdAAIAAAAKAAIAAAAjAAIAAAAJAAIAAAAkAAIAAAAKAAIAAAApAAIAAAAKAAIAAAAoAAIAAAAKAAIAAAAnAAIAAAAKAAIAAAAmAAIAAAAKAAIAAAAlAAIAAAAKAAIAAAAsAAIAAAALAAIAAAArAAIAAAAKAAIAAAAqAAIAAAAKAAIAAAAFAAEAAAAKAAAAAAAGAAEAAAAKAAAAAAAHAAEAAAAKAAAAAAAIAAEAAAAKAAAAAAAJAAEAAAAKAAAAAAAKAAEAAAAKAAAAAAALAAEAAAAKAAAAAAAMAAEAAAAKAAAAAAAOAAEAAAAKAAAAAAAPAAEAAAAKAAAAAAAQAAEAAAAKAAAAAAARAAEAAAAKAAAAAAASAAEAAAAKAAAAAAATAAEAAAAKAAAAAAAUAAEAAAAKAAAAAAAVAAEAAAAKAAAAAAAXAAEAAAAKAAAAAAAYAAEAAAAKAAAAAAAZAAEAAAAKAAAAAAAaAAEAAAAKAAAAAAAbAAEAAAAKAAAAAAAcAAEAAAAKAAAAAAAdAAEAAAAKAAAAAAAeAAEAAAALAAAAAAAjAAEAAAAJAAAAAAADAAEAAAAKAAAAAAAEAAEAAAAKAAAAAAANAAEAAAAKAAAAAAAWAAEAAAAKAAAAAAAkAAEAAAAKAAAAAAAlAAEAAAAKAAAAAAAmAAEAAAAKAAAAAAAnAAEAAAAKAAAAAAAoAAEAAAAKAAAAAAApAAEAAAAKAAAAAAAqAAEAAAAKAAAAAAArAAEAAAAKAAAAAAAsAAEAAAALAAAAAAABAAEAAAAJAAEAAAABAAAAAAAJAAEAAAABAP//AAAJAAEAAAABAP7/AAAJAAEAAAABAP3/AAAJAAEAAAABAPz/AAAJAAEAAAABAPv/AAAJAAEAAAABAPr/AAAJAAEAAAABAPn/AAAJAAEAAAABAPj/AAAJAAEAAAACAAEAAAAIAAMAAAACAAAAAAALAAEAAAACAP//AAALAAEAAAACAP7/AAALAAEAAAACAP3/AAALAAEAAAACAPz/AAALAAEAAAACAPv/AAALAAEAAAACAPr/AAALAAEAAAACAPn/AAALAAEAAAACAPj/AAALAAEAAAACAPf/AAALAAEAAAACAPb/AAALAAEAAAACAPX/AAALAAEAAAACAPT/AAALAAEAAAACAPP/AAALAAEAAAACAPL/AAALAAEAAAACAPH/AAALAAEAAAACAPD/AAALAAEAAAACAO//AAALAAEAAAACAO7/AAALAAEAAAACAO3/AAALAAEAAAACAOz/AAALAAEAAAACAOv/AAALAAEAAAACAOr/AAALAAEAAAACAOn/AAALAAEAAAACAOj/AAALAAEAAAACAOf/AAALAAEAAAABAPf/AAAJAAEAAAABAPb/AAAJAAEAAAABAPX/AAAJAAEAAAABAPT/AAAJAAEAAAABAPP/AAAJAAEAAAABAPL/AAAJAAEAAAABAPH/AAAJAAEAAAABAPD/AAAJAAEAAAABAO//AAAJAAEAAAABAO7/AAAJAAEAAAABAO3/AAAJAAEAAAABAOz/AAAJAAEAAAABAOv/AAAJAAEAAAABAOr/AAAJAAEAAAABAOn/AAAJAAEAAAABAOj/AAAJAAEAAAABAOf/AAAJAAEAAAA=")
 tile_set = ExtResource("4_hilu7")
 
 [node name="TileMapLayerCover" type="TileMapLayer" parent="."]
@@ -47,12 +48,63 @@ tile_map_data = PackedByteArray("AAACAAEAAAAKAAAAAAADAAEAAAAKAAAAAAABAAIAAAAJAAI
 enabled = false
 tile_set = ExtResource("5_at2i5")
 
-[node name="basic_alien" parent="." instance=ExtResource("4_caamt")]
-position = Vector2(2688, 44)
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+tile_set = ExtResource("5_at2i5")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(1086, 10)
 color = Color(0, 0, 0, 1)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_blr1e")
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="basic_alien" parent="enemies" instance=ExtResource("4_caamt")]
+position = Vector2(3217, 62)
+
+[node name="collectibles" type="Node2D" parent="."]
+script = ExtResource("8_6v1qk")
+
+[node name="basic_collectable" parent="collectibles" instance=ExtResource("8_11ysg")]
+position = Vector2(1807, 85)
+
+[node name="basic_collectable2" parent="collectibles" instance=ExtResource("8_11ysg")]
+position = Vector2(1807, 85)
+
+[node name="basic_collectable3" parent="collectibles" instance=ExtResource("8_11ysg")]
+position = Vector2(2189, 85)
+
+[node name="basic_collectable4" parent="collectibles" instance=ExtResource("8_11ysg")]
+position = Vector2(2608, 85)
+
+[node name="basic_collectable5" parent="collectibles" instance=ExtResource("8_11ysg")]
+position = Vector2(3010, 85)
+
+[node name="basic_collectable6" parent="collectibles" instance=ExtResource("8_11ysg")]
+position = Vector2(3458, 85)
+
+[node name="basic_collectable7" parent="collectibles" instance=ExtResource("8_11ysg")]
+position = Vector2(4158, -169)
+
+[node name="basic_collectable8" parent="collectibles" instance=ExtResource("8_11ysg")]
+position = Vector2(1423, 85)
+
+[node name="basic_collectable9" parent="collectibles" instance=ExtResource("8_11ysg")]
+position = Vector2(3872, 85)
+
+[node name="fragments" type="Node2D" parent="."]
+
+[node name="fragment_key" parent="fragments" instance=ExtResource("9_plg7i")]
+position = Vector2(4157, -367)
+
+[node name="fragment_key2" parent="fragments" instance=ExtResource("9_plg7i")]
+position = Vector2(3877, -367)
+
+[node name="fragment_key3" parent="fragments" instance=ExtResource("9_plg7i")]
+position = Vector2(3649, -367)
+
+[node name="fragment" parent="fragments" instance=ExtResource("10_plg7i")]
+position = Vector2(5255, -427)
+
+[connection signal="child_exiting_tree" from="collectibles" to="collectibles" method="_on_child_exiting_tree"]
+[connection signal="collected" from="fragments/fragment_key" to="." method="_on_fragment_key_collected"]
+[connection signal="collected" from="fragments/fragment_key2" to="." method="_on_fragment_key_2_collected"]
+[connection signal="collected" from="fragments/fragment_key3" to="." method="_on_fragment_key_3_collected"]
